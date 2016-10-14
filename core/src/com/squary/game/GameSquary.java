@@ -1,33 +1,89 @@
 package com.squary.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class GameSquary extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+public class GameSquary implements ApplicationListener {
+	SpriteBatch mainBatch;
+	ShapeRenderer mainSR;
+
+	float accumulator;
+	private static final float STEP = 1/60f;
+	private GameStateManager gsm;
+	private OrthographicCamera cam;
+	private OrthographicCamera hud;
+
+	public static int VWIDTH = 600;
+	public static int VHEIGHT = 600;
+	public static String TITLE = "Squary";
 	
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	public void create() {
+		mainBatch = new SpriteBatch();
+		mainSR = new ShapeRenderer();
+		
+		cam = new OrthographicCamera();
+		cam.setToOrtho(false, VWIDTH, VHEIGHT);
+		
+		hud = new OrthographicCamera();
+		hud.setToOrtho(false, VWIDTH, VHEIGHT);
+		
+		
+		gsm = new GameStateManager(this);
 	}
 
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void render() {
+		// accumulator += Gdx.graphics.getRawDeltaTime();
+		accumulator += Gdx.graphics.getDeltaTime();
+		while (accumulator >= STEP) {
+			accumulator -= STEP;
+			gsm.update(STEP);
+			gsm.render();
+		}
+
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+
 	}
 	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
+	public OrthographicCamera getCam(){
+		return cam;
+	}
+	
+	public OrthographicCamera getHud(){
+		return hud;
+	}
+	
+	public SpriteBatch getSpriteBatch(){
+		return mainBatch;
+	}
+
+	public ShapeRenderer getShapeRenderer(){
+		return mainSR;
 	}
 }
