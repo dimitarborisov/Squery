@@ -10,15 +10,47 @@ public class Play extends GameState {
 
 	GamePlayer player;
 	GameWall[] gameWalls;
-	
+
 	InputProcessor inputProcessor;
 
 	protected Play(GameStateManager gsm) {
 		super(gsm);
-		gameWalls = new GameWall[10];
-		player = new GamePlayer(game);
 
-		
+		// setting up wall
+		gameWalls = new GameWall[8];
+		for (int i = 0; i < 8; i++) {
+			gameWalls[i] = new GameWall(game);
+		}
+
+		// bottom
+		gameWalls[0].setPos(0, 0);
+		gameWalls[0].setSize(260, 20);
+
+		gameWalls[1].setPos(340, 0);
+		gameWalls[1].setSize(260, 20);
+
+		// top
+		gameWalls[2].setPos(0, 580);
+		gameWalls[2].setSize(260, 20);
+
+		gameWalls[3].setPos(340, 580);
+		gameWalls[3].setSize(260, 20);
+
+		// left
+		gameWalls[4].setPos(0, 0);
+		gameWalls[4].setSize(20, 260);
+
+		gameWalls[5].setPos(0, 340);
+		gameWalls[5].setSize(20, 260);
+
+		// right
+		gameWalls[6].setPos(580, 0);
+		gameWalls[6].setSize(20, 260);
+
+		gameWalls[7].setPos(580, 340);
+		gameWalls[7].setSize(20, 260);
+
+		player = new GamePlayer(game);
 
 		inputProcessor = new InputProcessor() {
 
@@ -107,6 +139,17 @@ public class Play extends GameState {
 	public void update(float dt) {
 		player.update(dt);
 
+		gameWalls[0].update(dt);
+		gameWalls[1].update(dt);
+
+		gameWalls[2].update(dt);
+		gameWalls[3].update(dt);
+
+		gameWalls[4].update(dt);
+		gameWalls[5].update(dt);
+		
+		gameWalls[6].update(dt);
+		gameWalls[7].update(dt);
 	}
 
 	@Override
@@ -116,6 +159,17 @@ public class Play extends GameState {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 
 		player.render();
+		gameWalls[0].render();
+		gameWalls[1].render();
+
+		gameWalls[2].render();
+		gameWalls[3].render();
+
+		gameWalls[4].render();
+		gameWalls[5].render();
+		
+		gameWalls[6].render();
+		gameWalls[7].render();
 	}
 
 	@Override
