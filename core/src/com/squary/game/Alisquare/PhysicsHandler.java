@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class PhysicsHandler {
     public ArrayList<Collision> collisions;
+    private boolean resolved = false;
 
     public PhysicsHandler(GamePlayer _player, GameBoard _board){
         List<GameWall> walls = _board.getWalls();
@@ -21,9 +22,12 @@ public class PhysicsHandler {
         collisions = new ArrayList<Collision>();
 
         for (GameEntities wall: walls){
-            if (Collision.checkCollision(_player.body.bounds,wall.getBody().bounds)){
-                collisions.add(new Collision(_player, wall));
+            Vector2 col = Collision.AACheck(_player.body.bounds,wall.getBody().bounds);
+            if (!col.equals(new Vector2(0,0))){
+                _player.body.bounds.position.subtract(col);
             }
         }
+
+
     }
 }

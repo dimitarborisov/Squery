@@ -223,10 +223,6 @@ public class Play extends GameState {
 		gameBoard.update(dt);
 
         PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
-        for (Collision col: handler.collisions){
-            System.out.println("Collision: " + col.toString());
-        }
-
 
 		if(player.getX() + player.getSize() >= GameSquary.VWIDTH){
 			//System.out.println("HIT RIGHT border");

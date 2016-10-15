@@ -54,8 +54,6 @@ public class GamePlayer extends GameEntities {
 
 			playerSprite.setX(body.bounds.position.x-(playerSprite.getWidth()/2));
 			playerSprite.setY(body.bounds.position.y-(playerSprite.getHeight()/2));
-
-
         }
 	}
 

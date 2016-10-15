@@ -27,6 +27,20 @@ public class Vector2 {
         return new Vector2(_vector.x*x,_vector.y*y);
     }
 
+    public Vector2 mul(float _factor){
+        return new Vector2(x*_factor,y*_factor);
+    }
+
+
+    public boolean equals(Vector2 _vector){
+        if (x == _vector.x && y==_vector.y){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     public static Vector2 normalize(Vector2 _vector){
         float mag = magnitude(_vector);
         return new Vector2(_vector.x/mag,_vector.y/mag);
