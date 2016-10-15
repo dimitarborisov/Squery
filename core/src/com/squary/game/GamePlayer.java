@@ -11,7 +11,7 @@ public class GamePlayer extends GameEntities {
 
 	private Sprite playerSprite;
 	private int size = 20;
-	private RigidBody body;
+	public RigidBody body;
 	
 	public GamePlayer(GameSquary game) {
 		super(game);
@@ -54,10 +54,18 @@ public class GamePlayer extends GameEntities {
 
 			playerSprite.setX(body.bounds.position.x-(playerSprite.getWidth()/2));
 			playerSprite.setY(body.bounds.position.y-(playerSprite.getHeight()/2));
+
+
         }
 	}
-	
-	public float getDx(){
+
+    @Override
+    public RigidBody getBody() {
+        return body;
+    }
+
+
+    public float getDx(){
 		return body.velocity.x;
 	}
 	

@@ -13,12 +13,14 @@ public class GameBoard {
 	//0 = empty; 1=wall, 2=enemy
 	private List<GameEntities> walls;
 	private List<GameEntities> enemies;
+	private GamePlayer player;
 	private GameSquary game;
 	
 	public GameBoard(GameSquary game) {
 //		board  = new int[SIZE][SIZE];
 		walls = new ArrayList<GameEntities>();
 		enemies = new ArrayList<GameEntities>();
+
 		this.game = game;
 	}
 	
@@ -41,7 +43,13 @@ public class GameBoard {
 		enemies.clear();
 		initialize();
 	}
-	
+
+	public List<GameEntities> getWalls(){
+		return walls;
+	}
+	public List<GameEntities> getEnemies(){
+		return enemies;
+	}
 	public void update(float dt) {
 		for (GameEntities wall : walls){
 			wall.update(dt);

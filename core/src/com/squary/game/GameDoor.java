@@ -41,7 +41,13 @@ public class GameDoor extends GameEntities {
 
 	}
 
-	public void setSizeX(float size){
+    @Override
+    public RigidBody getBody() {
+        //TODO
+        return null;
+    }
+
+    public void setSizeX(float size){
 		sizeX = size;
 	}
 	

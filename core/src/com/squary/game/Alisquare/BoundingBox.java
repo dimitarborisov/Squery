@@ -8,15 +8,21 @@ public class BoundingBox{
     public Vector2[] vertices;
     public String layer;
     public Vector2 position;
+    public boolean rect;
 
     public BoundingBox(Vector2[] _vertices, Vector2 _position){
-        this(_vertices,_position,null);
+        this(_vertices,_position,null,false);
     }
 
-    public BoundingBox(Vector2[] _vertices, Vector2 _position, String _layer){
+    public BoundingBox(Vector2[] _vertices, Vector2 _position, boolean _rect){
+        this(_vertices,_position,null,_rect);
+    }
+
+    public BoundingBox(Vector2[] _vertices, Vector2 _position, String _layer,boolean _rect){
         vertices = _vertices;
         layer = _layer;
         position = _position;
+        rect = _rect;
     }
 
     public static void scale(BoundingBox _box, Vector2 _size){
@@ -52,10 +58,10 @@ public class BoundingBox{
     }
 
     public static float[] projectToAxis(BoundingBox _shape, Vector2 _axis){
-        float min = _axis.dot(_shape.vertices[0]);
+        float min = _axis.dot(_shape.vertices[0].add(_shape.position));
         float max = min;
         for (Vector2 vertex:_shape.vertices){
-            float val = _axis.dot(vertex);
+            float val = _axis.dot(vertex.add(_shape.position));
             min = Math.min(min,val);
             max = Math.max(max,val);
         }
