@@ -1,8 +1,22 @@
 package com.squary.game.Alisquare;
 
+import com.squary.game.GameEntities;
+
 public class Collision{
 
+    GameEntities[] offenders;
+    String flag;
+
+    public Collision(GameEntities offenderA, GameEntities offenderB,String _flag){
+        offenders = new GameEntities[] {offenderA,offenderB};
+    }
+
+    public Collision(GameEntities offenderA, GameEntities offenderB){
+        this(offenderA,offenderB,"none");
+    }
+
     public static boolean checkCollision(BoundingBox _shape1, BoundingBox _shape2){
+
         //get axes
         Vector2[] axes = getAxes(_shape1,_shape2);
         //loop through each set of axes
@@ -25,11 +39,15 @@ public class Collision{
         Vector2[] shape2Axes = new Vector2[_shape2.vertices.length];
 
         for (int i = 0; i < _shape1.vertices.length; i++){
-            shape1Axes[i] = Vector2.normalize(Vector2.normal(_shape1.vertices[i].subtract(_shape1.vertices[i + 1 == _shape1.vertices.length ? 0 : i + 1])));
+            Vector2 current = _shape1.vertices[i].add(_shape1.position);
+            Vector2 next = _shape1.vertices[i + 1 == _shape1.vertices.length ? 0 : i + 1].add(_shape1.position);
+            shape1Axes[i] = Vector2.normalize(Vector2.normal(current.subtract(next)));
         }
 
         for (int i = 0; i < _shape1.vertices.length; i++){
-            shape2Axes[i] = Vector2.normalize(Vector2.normal(_shape2.vertices[i].subtract(_shape2.vertices[i + 1 == _shape2.vertices.length ? 0 : i + 1])));
+            Vector2 current = _shape2.vertices[i].add(_shape1.position);
+            Vector2 next = _shape2.vertices[i + 1 == _shape2.vertices.length ? 0 : i + 1].add(_shape1.position);
+            shape2Axes[i] = Vector2.normalize(Vector2.normal(current.subtract(next)));
         }
 
         System.arraycopy(shape1Axes, 0, axes, 0, shape1Axes.length);

@@ -6,6 +6,8 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.squary.game.Alisquare.BoundingBox;
+import com.squary.game.Alisquare.Collision;
+import com.squary.game.Alisquare.PhysicsHandler;
 import com.squary.game.Alisquare.Vector2;
 
 public class Play extends GameState {
@@ -186,20 +188,26 @@ public class Play extends GameState {
 
 		gameBoard.update(dt);
 
+        PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
+        for (Collision col: handler.collisions){
+            System.out.println("Collision: " + col.toString());
+        }
+
+
 		if(player.getX() + player.getSize() >= GameSquary.VWIDTH){
-			System.out.println("HIT RIGHT border");
+			//System.out.println("HIT RIGHT border");
 		}
 		
 		if(player.getX() <= 0){
-			System.out.println("HIT left border");
+			//System.out.println("HIT left border");
 		}
 		
 		if(player.getY() <= 0){
-			System.out.println("Hit the bottom");
+			//System.out.println("Hit the bottom");
 		}
 		
 		if(player.getY() + player.getSize() >= GameSquary.VHEIGHT){
-			System.out.println("Hit the top");
+			//System.out.println("Hit the top");
 		}
 		
 	}

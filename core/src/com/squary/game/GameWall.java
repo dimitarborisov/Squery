@@ -31,21 +31,24 @@ public class GameWall extends GameEntities {
 
 	@Override
 	public void render() {
-		if (GameSquary.debug == true){
-			debugRender();
-		}
+
 		game.getSpriteBatch().begin();
 		
 		wallSprite.draw(game.getSpriteBatch());
 		
 		game.getSpriteBatch().end();
 
+        if (GameSquary.debug == true){
+            debugRender();
+        }
 	}
 
 	private void debugRender(){
 		game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Line);
 
+        game.getShapeRenderer().setColor(1,0,0,0);
 		game.getShapeRenderer().polygon(Vector2.toFloatArray(body.bounds.vertices,body.bounds.position));
+
 
 		game.getShapeRenderer().end();
 	}
@@ -58,8 +61,13 @@ public class GameWall extends GameEntities {
 
 	}
 
-	
-	public void setPos(float x, float y){
+    @Override
+    public RigidBody getBody() {
+        return body;
+    }
+
+
+    public void setPos(float x, float y){
 		body.bounds.position.x = x;
 		body.bounds.position.y = y;
 
