@@ -38,22 +38,22 @@ public class Menu extends GameState {
 		Tween.to(exitButton.getSprite(), TweenEngineSprite.POS_XY, 1.5f)
 				.targetRelative(100, 0)
 				.delay(0.5f)
-				.ease(TweenEquations.easeOutQuint)
+				.ease(TweenEquations.easeOutCubic)
 				.start(tweenManager);
 		
 		Tween.to(otherButton.getSprite(), TweenEngineSprite.POS_XY, 1.5f)
 				.targetRelative(150, 0)
 				.delay(0.6f)
-				.ease(TweenEquations.easeOutQuint)
+				.ease(TweenEquations.easeOutCubic)
 				.start(tweenManager);
 		
 		Tween.to(startButton.getSprite(), TweenEngineSprite.POS_XY, 1.5f)
 				.targetRelative(200, 0)
 				.delay(0.7f)
-				.ease(TweenEquations.easeInOutQuint)
+				.ease(TweenEquations.easeOutCubic)
 				.start(tweenManager);
 		
-		Tween.to(logoSprite, TweenEngineSprite.POS_XY, 5f)
+		Tween.to(logoSprite, TweenEngineSprite.POS_XY, 3f)
 				.target(200, 200)
 				.delay(2.2f)
 				.ease(TweenEquations.easeOutBack)
