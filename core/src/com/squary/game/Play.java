@@ -10,6 +10,7 @@ public class Play extends GameState {
 
 	GamePlayer player;
 	GameWall[] gameWalls;
+	GameBoard gameBoard;
 
 	InputProcessor inputProcessor;
 
@@ -21,6 +22,8 @@ public class Play extends GameState {
 		for (int i = 0; i < 8; i++) {
 			gameWalls[i] = new GameWall(game);
 		}
+		gameBoard = new GameBoard(game);
+		gameBoard.initialize();
 
 		// bottom
 		gameWalls[0].setPos(0, 0);
@@ -150,6 +153,8 @@ public class Play extends GameState {
 		
 		gameWalls[6].update(dt);
 		gameWalls[7].update(dt);
+		
+		gameBoard.update(dt);
 	}
 
 	@Override
@@ -170,6 +175,8 @@ public class Play extends GameState {
 		
 		gameWalls[6].render();
 		gameWalls[7].render();
+		
+		gameBoard.render();
 	}
 
 	@Override
