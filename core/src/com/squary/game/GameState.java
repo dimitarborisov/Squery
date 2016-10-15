@@ -1,5 +1,6 @@
 package com.squary.game;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -13,6 +14,7 @@ public abstract class GameState {
 	
 	protected OrthographicCamera cam;
 	protected OrthographicCamera hud;
+	protected TextureManager am;
 	
 	protected GameState(GameStateManager gsm){
 		this.gsm = gsm;
@@ -21,6 +23,7 @@ public abstract class GameState {
 		cam = game.getCam();
 		hud = game.getHud();
 		sr = game.getShapeRenderer();
+		am = game.getTextureManager();
 	}
 	
 	public GameStateManager getStateManager(){ return gsm; }

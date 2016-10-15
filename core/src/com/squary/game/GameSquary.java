@@ -2,7 +2,9 @@ package com.squary.game;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -20,8 +22,11 @@ public class GameSquary implements ApplicationListener {
 	public static int VHEIGHT = 600;
 	public static String TITLE = "Squary";
 	
+	TextureManager manager;
+	
 	@Override
 	public void create() {
+		manager = new TextureManager();
 		mainBatch = new SpriteBatch();
 		mainSR = new ShapeRenderer();
 		
@@ -31,6 +36,8 @@ public class GameSquary implements ApplicationListener {
 		hud = new OrthographicCamera();
 		hud.setToOrtho(false, VWIDTH, VHEIGHT);
 		
+		
+		manager.loadTexture("Logo", "rect4136.png");
 		
 		gsm = new GameStateManager(this);
 	}
@@ -85,5 +92,9 @@ public class GameSquary implements ApplicationListener {
 
 	public ShapeRenderer getShapeRenderer(){
 		return mainSR;
+	}
+	
+	public TextureManager getTextureManager(){
+		return manager;
 	}
 }
