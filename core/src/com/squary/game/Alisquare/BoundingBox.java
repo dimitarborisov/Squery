@@ -6,7 +6,6 @@ import static java.lang.Math.sin;
 public class BoundingBox{
     public Vector2[] vertices;
     public String layer;
-
     public Vector2 position;
 
     public BoundingBox(Vector2[] _vertices, Vector2 _position){
@@ -39,7 +38,7 @@ public class BoundingBox{
         float angleProgress = _angle;
         Vector2[] points = new Vector2[_sides];
         for (int i = 0; i< _sides;i++){
-            points[i] = new Vector2((float)(_center.x + _scale * cos(angleProgress)),(float)(_center.y + _scale * sin(angleProgress)));
+            points[i] = new Vector2((float)(_scale * cos(angleProgress)),(float)(_scale * sin(angleProgress)));
             angleProgress += angleIncrement;
         }
         return new BoundingBox(points,_center);
