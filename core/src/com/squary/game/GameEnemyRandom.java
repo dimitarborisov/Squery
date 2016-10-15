@@ -26,10 +26,11 @@ public class GameEnemyRandom extends GameEnemy {
 		} else {
 			change = (Math.random()-0.5)*Math.PI;
 		}
-		
+
 		angleTheta += change;
-//		enemySprite.rotate((float)angleTheta);
-//		this.body.bounds.rotate(new Vector2(0,0), (float)change);
+		//enemySprite.rotate(0.01f.);
+		//enemySprite.rotate((float)angleTheta);
+		this.body.bounds.rotate(new Vector2(0,0), 0.01f);
 		// render at new position
 		enemySprite.setX(body.bounds.position.x - 9);//enemySprite.getHeight() instead of 10
 		enemySprite.setY(body.bounds.position.y - 7);//enemySprite.getWidth() instead of 10
