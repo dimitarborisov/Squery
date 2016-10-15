@@ -23,6 +23,10 @@ public class Vector2 {
         return new Vector2(x+_vector.x,y+_vector.y);
     }
 
+    public Vector2 mul(Vector2 _vector){
+        return new Vector2(_vector.x*x,_vector.y*y);
+    }
+
     public static Vector2 normalize(Vector2 _vector){
         float mag = magnitude(_vector);
         return new Vector2(_vector.x/mag,_vector.y/mag);
