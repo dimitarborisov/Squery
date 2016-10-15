@@ -89,6 +89,7 @@ public class Splash extends GameState {
 
 			@Override
 			public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+				Splash.this.getStateManager().setState(new FadeOutIn(Splash.this.getStateManager(), Splash.this, new Menu(Splash.this.getStateManager()), false, false));
 				return true;
 			}
 
