@@ -8,6 +8,7 @@ import com.squary.game.Alisquare.Vector2;
 
 public class GameWall extends GameEntities {
 	public RigidBody body;
+	float sizeX,sizeY;
 	Sprite wallSprite;
 	
 	public GameWall(GameSquary game,int _size) {

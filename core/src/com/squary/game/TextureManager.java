@@ -13,7 +13,7 @@ public class TextureManager {
 	}
 	
 	public void loadTexture(String name, String path){
-		Texture t = new Texture(Gdx.files.internal(path));
+		Texture t = new Texture(Gdx.files.internal(path), true);
 		
 		textureHash.put(name, t);
 	}
