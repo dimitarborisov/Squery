@@ -2,9 +2,7 @@ package com.squary.game;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -38,6 +36,10 @@ public class GameSquary implements ApplicationListener {
 		
 		
 		manager.loadTexture("Logo", "rect4136.png");
+		manager.loadTexture("player", "player.png");
+		manager.loadTexture("background", "background.png");
+		manager.loadTexture("locked_door", "lockDoor.png");
+		manager.loadTexture("locker", "lock.png");
 		
 		gsm = new GameStateManager(this);
 	}

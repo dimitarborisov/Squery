@@ -26,7 +26,7 @@ public class Splash extends GameState {
 		Tween.registerAccessor(Sprite.class, new TweenEngineSprite());
 		logo = new Sprite(am.getTexture("Logo"));
 		
-		logo.setSize(100f, 100f);
+		logo.setSize(20f, 20f);
 		logo.setPosition(100, 100);
 		
 		inputProcessor = new InputProcessor() {
@@ -106,8 +106,8 @@ public class Splash extends GameState {
 		
 		
 		sr.begin(ShapeType.Filled);
-		sr.setColor(Color.WHITE);
-		sr.circle(x, y, 10);
+		sr.setColor(Color.OLIVE);
+		
 		sr.end();
 		
 		sb.begin();

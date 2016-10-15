@@ -9,6 +9,7 @@ public class GameStateManager {
 	public static int PLAY = 1;
 	public static int SPLASH = 0;
 	public static int OPTIONS = 2;
+	public static int MENU = 3;
 
 	public GameStateManager(GameSquary gameSquary) {
 		this.game = gameSquary;
@@ -31,7 +32,8 @@ public class GameStateManager {
 
 	public GameState getState(int state) {
 		if (state == PLAY) {
-			return null;
+			Play.STATE = -1;
+			return new Play(this);
 		}
 
 		if (state == SPLASH) {
@@ -39,6 +41,10 @@ public class GameStateManager {
 		}
 
 		if (state == OPTIONS) {
+			return null;
+		}
+		
+		if (state == MENU) {
 			return null;
 		}
 

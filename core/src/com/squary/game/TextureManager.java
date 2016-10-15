@@ -10,7 +10,6 @@ public class TextureManager {
 	
 	public TextureManager(){
 		textureHash = new HashMap<String, Texture>();
-	
 	}
 	
 	public void loadTexture(String name, String path){
