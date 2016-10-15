@@ -1,5 +1,7 @@
 package com.squary.game;
 
+import com.squary.game.Alisquare.Vector2;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +28,9 @@ public class GameBoard {
 				int rand = (int)Math.ceil(Math.random() * WALLFACTOR);
 				// render wall if value is 1
 				if (rand == 1) {
-					GameWall temp = new GameWall(this.game);
+					GameWall temp = new GameWall(this.game,new Vector2(20,20),(float)Math.PI/4);
 					temp.setPos(i*20+30, j*20+30);
-					temp.setSize(20,20);
-					walls.add(temp);					
+					walls.add(temp);
 				}
 			}
 		}

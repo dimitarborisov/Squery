@@ -9,16 +9,25 @@ import com.squary.game.Alisquare.Vector2;
 public class GameWall extends GameEntities {
 	public RigidBody body;
 	Sprite wallSprite;
-	float sizeX,sizeY;
 	
-	public GameWall(GameSquary game) {
+	public GameWall(GameSquary game,int _size) {
 		super(game);
 		
 		wallSprite = new Sprite(game.getTextureManager().getTexture("wall"));
-		body = new RigidBody(BoundingBox.createRegularPolygon(4,new Vector2(290,290),(int)sizeX-5,(float)Math.PI/4),true,10,1);
-
+		body = new RigidBody(BoundingBox.createRegularPolygon(4,new Vector2(0,0),(int)_size-5,(float)Math.PI/4),true,10,1);
+        wallSprite.setSize(_size, _size);
 
 	}
+
+
+    public GameWall(GameSquary game,Vector2 _size,float _rotation) {
+        super(game);
+
+        wallSprite = new Sprite(game.getTextureManager().getTexture("wall"));
+        body = new RigidBody(BoundingBox.createRegularPolygon(4,new Vector2(0,0),(int)_size.x-5,_rotation),true,10,1);
+        wallSprite.setSize(_size.x, _size.y);
+
+    }
 
 	@Override
 	public void render() {
@@ -43,29 +52,17 @@ public class GameWall extends GameEntities {
 
 	@Override
 	public void update(float dt) {
-		wallSprite.setX(body.bounds.position.x);
-		wallSprite.setY(body.bounds.position.y);
-		wallSprite.setSize(sizeX, sizeY);
+		wallSprite.setX(body.bounds.position.x - (wallSprite.getWidth()/2));
+		wallSprite.setY(body.bounds.position.y - (wallSprite.getHeight()/2));
 
-	}
 
-	public void setSizeX(float size){
-		sizeX = size;
-	}
-	
-	public void setSizeY(float size){
-		sizeY = size;
 	}
 
 	
 	public void setPos(float x, float y){
 		body.bounds.position.x = x;
-		body.bounds.position.y= y;
-	}
-	
-	public void setSize(float width, float height){
-		this.sizeX = width;
-		this.sizeY = height;
+		body.bounds.position.y = y;
+
 	}
 	
 }

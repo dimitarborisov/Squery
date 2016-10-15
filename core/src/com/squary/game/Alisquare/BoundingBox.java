@@ -1,6 +1,7 @@
 package com.squary.game.Alisquare;
 
 import static java.lang.Math.cos;
+import static java.lang.Math.min;
 import static java.lang.Math.sin;
 
 public class BoundingBox{
@@ -16,6 +17,38 @@ public class BoundingBox{
         vertices = _vertices;
         layer = _layer;
         position = _position;
+    }
+
+    public static void scale(BoundingBox _box, Vector2 _size){
+        float maxX = _box.vertices[0].x,minX = _box.vertices[0].x;
+        float maxY = _box.vertices[0].y,minY = _box.vertices[0].y;
+        for (int i = 0;i<_box.vertices.length;i++ ){
+            maxX = Math.max(_box.vertices[i].x,maxX);
+            minX = Math.min(_box.vertices[i].x,minX);
+            maxY = Math.max(_box.vertices[i].x,maxY);
+            minY = Math.min(_box.vertices[i].x,minY);
+        }
+        float xScale = _size.x/(maxX-minX);
+        float yScale = _size.y/(maxY-minY);
+        Vector2 scale = new Vector2(xScale,yScale);
+        for (int i = 0;i<_box.vertices.length;i++ ){
+            _box.vertices[i] = _box.vertices[i].mul(scale);
+        }
+    }
+
+    //Broken
+    public static void rotate(BoundingBox _box, Vector2 _center, float _angle){
+        float s = (float)Math.sin(_angle);
+        float c = (float)Math.cos(_angle);
+
+        for (int i = 0;i<_box.vertices.length;i++ ){
+            _box.vertices[i].x = _box.vertices[i].x - _center.x;
+            _box.vertices[i].y = _box.vertices[i].y - _center.y;
+            _box.vertices[i].x = (_box.vertices[i].x * c) - (_box.vertices[i].y * s);
+            _box.vertices[i].y = (_box.vertices[i].x * s) - (_box.vertices[i].y * c);
+            _box.vertices[i].x = _box.vertices[i].x + _center.x;
+            _box.vertices[i].y = _box.vertices[i].y + _center.y;
+        }
     }
 
     public static float[] projectToAxis(BoundingBox _shape, Vector2 _axis){
