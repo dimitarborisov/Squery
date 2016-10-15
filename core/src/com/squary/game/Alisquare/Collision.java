@@ -72,31 +72,46 @@ public class Collision{
         float xOverlap = 0;
         float yOverlap = 0;
         if(_shape1.rect && _shape2.rect){
-            // check for existance of overlap
-            float minX1 = _shape1.vertices[0].x+_shape1.position.x;
-            float maxX1 = _shape1.vertices[0].x+_shape1.position.x;
-            float minY1 = _shape1.vertices[0].y+_shape1.position.y;
-            float maxY1 = _shape1.vertices[0].y+_shape1.position.y;
-            for (Vector2 vertex: _shape1.vertices) {
-                minX1 = Math.min(vertex.x,minX1);
-                minY1 = Math.min(vertex.y,minY1);
-                maxX1 = Math.max(vertex.x,maxX1);
-                maxY1 = Math.max(vertex.y,maxY1);
-            }
-            float minX2 = _shape2.vertices[0].x+_shape2.position.x;
-            float maxX2 = _shape2.vertices[0].x+_shape2.position.x;
-            float minY2 = _shape2.vertices[0].y+_shape2.position.y;
-            float maxY2 = _shape2.vertices[0].y+_shape2.position.y;
-            for (Vector2 vertex: _shape2.vertices) {
-                minX2 = Math.min(vertex.x,minX2);
-                minY2 = Math.min(vertex.y,minY2);
-                maxX2 = Math.max(vertex.x,maxX2);
-                maxY2 = Math.max(vertex.y,maxY2);
-            }
+        	
+        	// find width and height
+        	
+            float x1 = _shape1.vertices[0].x+_shape1.position.x;
+            float x2 = _shape1.vertices[2].x+_shape1.position.x;
+            float y1 = _shape1.vertices[0].y+_shape1.position.y;
+            float y2 = _shape1.vertices[2].y+_shape1.position.y;
+            
+            float minX1 = Math.min(x1,x2);
+            float maxX1 = Math.max(x1,x2);
+            float minY1 = Math.min(y1,y2);
+            float maxY1 = Math.max(y1,y2);
+        
+            float X1 = _shape2.vertices[0].x+_shape2.position.x;
+            float X2 = _shape2.vertices[2].x+_shape2.position.x;
+            float Y1 = _shape2.vertices[0].y+_shape2.position.y;
+            float Y2 = _shape2.vertices[2].y+_shape2.position.y;
+            
+            float minX2 = Math.min(X1,X2);
+            float maxX2 = Math.max(X1,X2);
+            float minY2 = Math.min(Y1,Y2);
+            float maxY2 = Math.max(Y1,Y2);
+            
+            float totalWidth = maxX1-minX1 + maxX2-minX2;
+            float totalHeight = maxY1-minY1 + maxY2-minY2;
+            float actualXdist = Math.abs(_shape1.position.x - _shape2.position.x) * 2;
+            float actualYdist = Math.abs(_shape1.position.y - _shape2.position.y) * 2;
+            
+        	boolean isOverlap = (actualXdist < totalWidth) 
+                  && (actualYdist < totalHeight);
 
-            if(maxX1 >= minX2 ){
+        	if (isOverlap){
+        		return new Vector2(totalWidth-actualXdist,totalHeight-actualYdist);
+        	} else {
+        		return new Vector2(0,0);
+        	}
 
-            }
+//            if(minX1< minX2 && minX2<maxX1){
+//
+//            }
 
             //Check X axis overlap
             //if((minX1 <= maxX2 && minX2 <= maxX1)){
@@ -110,8 +125,8 @@ public class Collision{
         } else {
             throw new BoundingBoxException("Axis Aligned Collisions can only be between rectangles");
         }
-        System.out.println(xOverlap+","+yOverlap);
-        return new Vector2(xOverlap, yOverlap);
+//        System.out.println(xOverlap+","+yOverlap);
+//        return new Vector2(xOverlap, yOverlap);
     }
-
+    
 }
