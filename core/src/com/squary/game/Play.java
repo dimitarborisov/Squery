@@ -11,6 +11,7 @@ public class Play extends GameState {
 
 	GamePlayer player;
 	GameWall[] gameWalls;
+	GameBoard gameBoard;
 	GameDoor[] gameDoors;
 	
 	Sprite background;
@@ -31,6 +32,8 @@ public class Play extends GameState {
 		for (int i = 0; i < 8; i++) {
 			gameWalls[i] = new GameWall(game);
 		}
+		gameBoard = new GameBoard(game);
+		gameBoard.initialize();
 
 		// bottom
 		gameWalls[0].setPos(0, 0);
@@ -180,7 +183,8 @@ public class Play extends GameState {
 			gameDoors[i].update(dt);
 		}
 
-		
+		gameBoard.update(dt);
+
 		if(player.getX() + player.getSize() >= GameSquary.VWIDTH){
 			System.out.println("HIT RIGHT border");
 		}
@@ -214,6 +218,8 @@ public class Play extends GameState {
 		background.draw(game.getSpriteBatch());
 		game.getSpriteBatch().end();
 		player.render();
+				
+		gameBoard.render();
 		
 		for (int i = 0; i < 8; i++) {
 			gameWalls[i].render();
