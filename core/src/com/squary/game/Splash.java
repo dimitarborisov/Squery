@@ -70,7 +70,7 @@ public class Splash extends GameState {
 
 			@Override
 			public boolean keyUp(int keycode) {
-				Splash.this.getStateManager().setState(new FadeOutIn(Splash.this.getStateManager(), Splash.this, new Play(Splash.this.getStateManager()), false, false));
+				Splash.this.getStateManager().setState(new FadeOutIn(Splash.this.getStateManager(), Splash.this, new Menu(Splash.this.getStateManager()), false, false));
 				
 				return false;
 			}
