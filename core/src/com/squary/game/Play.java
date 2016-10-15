@@ -2,8 +2,9 @@ package com.squary.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Play extends GameState {
 	public static int STATE = -1;
@@ -11,12 +12,21 @@ public class Play extends GameState {
 	GamePlayer player;
 	GameWall[] gameWalls;
 	GameBoard gameBoard;
+	GameDoor[] gameDoors;
+	
+	Sprite background;
 
 	InputProcessor inputProcessor;
 
 	protected Play(GameStateManager gsm) {
 		super(gsm);
-
+		
+		//set background
+		background = new Sprite(game.getTextureManager().getTexture("background"));
+		background.setSize(600, 600);
+		background.setX(0);
+		background.setY(0);
+		
 		// setting up wall
 		gameWalls = new GameWall[8];
 		for (int i = 0; i < 8; i++) {
@@ -53,8 +63,31 @@ public class Play extends GameState {
 		gameWalls[7].setPos(580, 340);
 		gameWalls[7].setSize(20, 260);
 
+		// player
 		player = new GamePlayer(game);
 
+		// doors
+		gameDoors = new GameDoor[4];
+		for (int i = 0; i < 4; i++) {
+			gameDoors[i] = new GameDoor(game);
+		}
+		// bottom
+		gameDoors[0].setPos(260, 0);
+		gameDoors[0].setSize(80, 20);
+
+		// top
+		gameDoors[1].setPos(260, 580);
+		gameDoors[1].setSize(80, 20);
+
+		// left
+		gameDoors[2].setPos(0, 260);
+		gameDoors[2].setSize(20, 80);
+
+		// right
+		gameDoors[3].setPos(580, 260);
+		gameDoors[3].setSize(20, 80);
+
+		// input processing
 		inputProcessor = new InputProcessor() {
 
 			@Override
@@ -142,19 +175,32 @@ public class Play extends GameState {
 	public void update(float dt) {
 		player.update(dt);
 
-		gameWalls[0].update(dt);
-		gameWalls[1].update(dt);
-
-		gameWalls[2].update(dt);
-		gameWalls[3].update(dt);
-
-		gameWalls[4].update(dt);
-		gameWalls[5].update(dt);
+		for (int i = 0; i < 8; i++) {
+			gameWalls[i].update(dt);
+		}
 		
-		gameWalls[6].update(dt);
-		gameWalls[7].update(dt);
-		
+		for (int i = 0; i < 4; i++) {
+			gameDoors[i].update(dt);
+		}
+
 		gameBoard.update(dt);
+
+		if(player.getX() + player.getSize() >= GameSquary.VWIDTH){
+			System.out.println("HIT RIGHT border");
+		}
+		
+		if(player.getX() <= 0){
+			System.out.println("HIT left border");
+		}
+		
+		if(player.getY() <= 0){
+			System.out.println("Hit the bottom");
+		}
+		
+		if(player.getY() + player.getSize() >= GameSquary.VHEIGHT){
+			System.out.println("Hit the top");
+		}
+		
 	}
 
 	@Override
@@ -162,21 +208,26 @@ public class Play extends GameState {
 		// clear screen
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glClearColor(1, 1, 1, 1);
-
+		
+		//update the camera
+		game.getCam().update();
+		game.getSpriteBatch().setProjectionMatrix(game.getCam().combined);
+		
+		//render everything
+		game.getSpriteBatch().begin();
+		background.draw(game.getSpriteBatch());
+		game.getSpriteBatch().end();
 		player.render();
-		gameWalls[0].render();
-		gameWalls[1].render();
-
-		gameWalls[2].render();
-		gameWalls[3].render();
-
-		gameWalls[4].render();
-		gameWalls[5].render();
-		
-		gameWalls[6].render();
-		gameWalls[7].render();
-		
+				
 		gameBoard.render();
+		
+		for (int i = 0; i < 8; i++) {
+			gameWalls[i].render();
+		}
+		
+		for(int i = 0; i < 4; i++){
+			gameDoors[i].render();
+		}
 	}
 
 	@Override

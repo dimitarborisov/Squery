@@ -1,13 +1,10 @@
 package com.squary.game;
 
 public abstract class GameEntities {
-	protected float x,y;
 	protected boolean visible;
 	protected GameSquary game;
 	
 	public GameEntities(GameSquary game){
-		x = 0;
-		y = 0;
 		this.visible = true;
 		this.game = game;
 	}
