@@ -43,6 +43,10 @@ public class GameSquary implements ApplicationListener {
 		manager.loadTexture("locker", "lock.png");
 		manager.loadTexture("wall", "walls.png");
 		manager.loadTexture("enemy_stationary", "circle.png");
+		manager.loadTexture("logo2-background", "logo2-background.png");
+		manager.loadTexture("logo2-e1", "logo2-e1.png");
+		manager.loadTexture("logo2-e2", "logo2-e2.png");
+		manager.loadTexture("logo2-e3", "logo2-e3.png");
 		
 		gsm = new GameStateManager(this);
 	}

@@ -43,6 +43,10 @@ public class GameEnemyStationary extends GameEnemy {
 		enemySprite.setSize(sizeX, sizeY);
 
 	}
+	
+	public RigidBody getBody() {
+		return body;
+	}
 
 
 }

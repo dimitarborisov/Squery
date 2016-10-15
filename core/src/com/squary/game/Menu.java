@@ -1,7 +1,15 @@
 package com.squary.game;
 
-public class Menu extends GameState {
+import aurelienribon.tweenengine.TweenManager;
 
+public class Menu extends GameState {
+	
+	private final TweenManager tweenManager = new TweenManager();
+	SpriteButton startButton;
+	SpriteButton otherButton;
+	SpriteButton exitButton;
+	
+	
 	protected Menu(GameStateManager gsm) {
 		super(gsm);
 		// TODO Auto-generated constructor stub

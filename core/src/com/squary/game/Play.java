@@ -5,6 +5,10 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.squary.game.Alisquare.BoundingBox;
+import com.squary.game.Alisquare.Collision;
+import com.squary.game.Alisquare.PhysicsHandler;
+import com.squary.game.Alisquare.Vector2;
 
 public class Play extends GameState {
 	public static int STATE = -1;
@@ -29,39 +33,38 @@ public class Play extends GameState {
 		
 		// setting up wall
 		gameWalls = new GameWall[8];
-		for (int i = 0; i < 8; i++) {
-			gameWalls[i] = new GameWall(game);
+		for (int i = 0; i < 4; i++) {
+			gameWalls[i] = new GameWall(game,new Vector2(260,20),(float)Math.PI/4);
+            BoundingBox.scale(gameWalls[i].body.bounds,new Vector2(260,20));
 		}
+        for (int i = 4; i < 8; i++) {
+            gameWalls[i] = new GameWall(game,new Vector2(20,260),(float)Math.PI/4);
+            BoundingBox.scale(gameWalls[i].body.bounds,new Vector2(20,260));
+        }
 		gameBoard = new GameBoard(game);
 		gameBoard.initialize();
 
+		float wallspriteW = (gameWalls[0].wallSprite.getWidth()/2);
+		float wallspriteH = (gameWalls[0].wallSprite.getHeight()/2);
 		// bottom
-		gameWalls[0].setPos(0, 0);
-		gameWalls[0].setSize(260, 20);
+		gameWalls[0].setPos(0 + wallspriteW, 0 + wallspriteH);
 
-		gameWalls[1].setPos(340, 0);
-		gameWalls[1].setSize(260, 20);
+		gameWalls[1].setPos(340+ wallspriteW, 0+ wallspriteH);
 
 		// top
-		gameWalls[2].setPos(0, 580);
-		gameWalls[2].setSize(260, 20);
+		gameWalls[2].setPos(0+ wallspriteW, 580+ wallspriteH);
 
-		gameWalls[3].setPos(340, 580);
-		gameWalls[3].setSize(260, 20);
+		gameWalls[3].setPos(340+ wallspriteW, 580+ wallspriteH);
 
 		// left
-		gameWalls[4].setPos(0, 0);
-		gameWalls[4].setSize(20, 260);
+		gameWalls[4].setPos(0+ wallspriteH, 0+ wallspriteW);
 
-		gameWalls[5].setPos(0, 340);
-		gameWalls[5].setSize(20, 260);
+		gameWalls[5].setPos(0+ wallspriteH, 340+ wallspriteW);
 
 		// right
-		gameWalls[6].setPos(580, 0);
-		gameWalls[6].setSize(20, 260);
+		gameWalls[6].setPos(580+ wallspriteH, 0+ wallspriteW);
 
-		gameWalls[7].setPos(580, 340);
-		gameWalls[7].setSize(20, 260);
+		gameWalls[7].setPos(580+ wallspriteH, 340+ wallspriteW);
 
 		// player
 		player = new GamePlayer(game);
@@ -185,20 +188,26 @@ public class Play extends GameState {
 
 		gameBoard.update(dt);
 
+        PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
+        for (Collision col: handler.collisions){
+            System.out.println("Collision: " + col.toString());
+        }
+
+
 		if(player.getX() + player.getSize() >= GameSquary.VWIDTH){
-			System.out.println("HIT RIGHT border");
+			//System.out.println("HIT RIGHT border");
 		}
 		
 		if(player.getX() <= 0){
-			System.out.println("HIT left border");
+			//System.out.println("HIT left border");
 		}
 		
 		if(player.getY() <= 0){
-			System.out.println("Hit the bottom");
+			//System.out.println("Hit the bottom");
 		}
 		
 		if(player.getY() + player.getSize() >= GameSquary.VHEIGHT){
-			System.out.println("Hit the top");
+			//System.out.println("Hit the top");
 		}
 		
 	}
