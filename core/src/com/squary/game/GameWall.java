@@ -26,7 +26,9 @@ public class GameWall extends GameEntities {
 
 	@Override
 	public void update(float dt) {
-		// TODO Auto-generated method stub
+		wallSprite.setX(x);
+		wallSprite.setY(y);
+		wallSprite.setSize(sizeX, sizeY);
 
 	}
 
@@ -38,5 +40,15 @@ public class GameWall extends GameEntities {
 		sizeY = size;
 	}
 
+	
+	public void setPos(float x, float y){
+		this.x = x;
+		this.y = y;
+	}
+	
+	public void setSize(float width, float height){
+		this.sizeX = width;
+		this.sizeY = height;
+	}
 	
 }
