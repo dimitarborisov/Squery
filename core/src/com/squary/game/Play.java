@@ -13,13 +13,17 @@ import com.squary.game.Alisquare.Vector2;
 public class Play extends GameState {
 	public static int STATE = -1;
 
-	GamePlayer player;
-	GameWall[] gameWalls;
-	GameBoard gameBoard;
-	GameDoor[] gameDoors;
+	private GamePlayer player;
+	private GameWall[] gameWalls;
+	private GameBoard gameBoard;
+	private GameDoor[] gameDoors;
+	
+	private float playerSpeed = 5;
 	
 	Sprite background;
-
+	
+	
+	boolean uno, dos = false;
 	InputProcessor inputProcessor;
 
 	protected Play(GameStateManager gsm) {
@@ -68,6 +72,7 @@ public class Play extends GameState {
 
 		// player
 		player = new GamePlayer(game);
+		player.body.velocity = new Vector2(0,0);
 
 		// doors
 		gameDoors = new GameDoor[4];
@@ -90,25 +95,43 @@ public class Play extends GameState {
 		gameDoors[3].setPos(580, 260);
 		gameDoors[3].setSize(20, 80);
 
+		if(STATE == 1){
+			player.body.bounds.position = new Vector2(30, (GameSquary.VHEIGHT / 2) - player.getSize() / 2);
+		}
+		if(STATE == 2){
+			player.body.bounds.position = new Vector2(GameSquary.VWIDTH - 30, (GameSquary.VHEIGHT / 2) - player.getSize() / 2);
+		}
+		if(STATE == 3){
+			player.body.bounds.position = new Vector2((GameSquary.VWIDTH / 2) - player.getSize() / 2, GameSquary.VHEIGHT - player.getSize() - 10);
+		}
+		if(STATE == 4){
+			
+			player.body.bounds.position = new Vector2((GameSquary.VWIDTH / 2) - player.getSize() / 2, 30);
+		}
+		
 		// input processing
 		inputProcessor = new InputProcessor() {
 
 			@Override
 			public boolean keyDown(int keycode) {
 				if (keycode == Keys.D) {
-					player.setDx(player.getDx() + 10);
+					uno = true;
+					player.setDx(player.getDx() + playerSpeed);
 				}
 
 				if (keycode == Keys.A) {
-					player.setDx(player.getDx() - 10);
+					uno = true;
+					player.setDx(player.getDx() - playerSpeed);
 				}
 
 				if (keycode == Keys.W) {
-					player.setDy(player.getDy() + 10);
+					dos = true;
+					player.setDy(player.getDy() + playerSpeed);
 				}
 
 				if (keycode == Keys.S) {
-					player.setDy(player.getDy() - 10);
+					dos = true;
+					player.setDy(player.getDy() - playerSpeed);
 				}
 
 				return true;
@@ -117,19 +140,30 @@ public class Play extends GameState {
 			@Override
 			public boolean keyUp(int keycode) {
 				if (keycode == Keys.D) {
-					player.setDx(player.getDx() - 10);
+					if(uno){
+						player.setDx(player.getDx() - playerSpeed);
+					}
+					
 				}
 
 				if (keycode == Keys.A) {
-					player.setDx(player.getDx() + 10);
+					if(uno){
+						player.setDx(player.getDx() + playerSpeed);
+					}
 				}
 
 				if (keycode == Keys.W) {
-					player.setDy(player.getDy() - 10);
+					if(dos){
+						player.setDy(player.getDy() - playerSpeed);
+					}
+					
 				}
 
 				if (keycode == Keys.S) {
-					player.setDy(player.getDy() + 10);
+					if(dos){
+						player.setDy(player.getDy() + playerSpeed);
+					}
+					
 				}
 
 				return true;
@@ -189,25 +223,35 @@ public class Play extends GameState {
 		gameBoard.update(dt);
 
         PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
-        for (Collision col: handler.collisions){
-            System.out.println("Collision: " + col.toString());
-        }
-
 
 		if(player.getX() + player.getSize() >= GameSquary.VWIDTH){
 			//System.out.println("HIT RIGHT border");
+			Play.STATE = 1;
+			Gdx.input.setInputProcessor(null);
+
+			getStateManager().setState(new RightToLeft(getStateManager(), this, new Play(getStateManager()), false, false));
+			
 		}
 		
 		if(player.getX() <= 0){
 			//System.out.println("HIT left border");
+			Play.STATE = 2;
+			Gdx.input.setInputProcessor(null);
+			getStateManager().setState(new LeftToRight(getStateManager(), this, new Play(getStateManager()), false, false));
 		}
 		
 		if(player.getY() <= 0){
 			//System.out.println("Hit the bottom");
+			Play.STATE = 3;
+			Gdx.input.setInputProcessor(null);
+			getStateManager().setState(new BottomToTop(getStateManager(), this, new Play(getStateManager()), false, false));
 		}
 		
 		if(player.getY() + player.getSize() >= GameSquary.VHEIGHT){
 			//System.out.println("Hit the top");
+			Play.STATE = 4;
+			Gdx.input.setInputProcessor(null);
+			getStateManager().setState(new TopToBottom(getStateManager(), this, new Play(getStateManager()), false, false));
 		}
 		
 	}

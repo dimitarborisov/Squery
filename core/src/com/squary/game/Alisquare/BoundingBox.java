@@ -66,6 +66,10 @@ public class BoundingBox{
     }
 
     public static BoundingBox createRegularPolygon(int _sides, Vector2 _center, int _scale, float _angle) throws BoundingBoxException{
+        boolean rect = false;
+        if (_sides == 4){
+            rect = true;
+        }
         if (_sides < 3) {
             throw new BoundingBoxException("Bounding boxes must have more than 2 sides");
         }
@@ -76,7 +80,7 @@ public class BoundingBox{
             points[i] = new Vector2((float)(_scale * cos(angleProgress)),(float)(_scale * sin(angleProgress)));
             angleProgress += angleIncrement;
         }
-        return new BoundingBox(points,_center);
+        return new BoundingBox(points,_center,rect);
     }
 
     public static BoundingBox createRegularPolygon(int _sides, Vector2 _center, int _scale) throws BoundingBoxException{
