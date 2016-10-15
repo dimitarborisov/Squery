@@ -43,17 +43,13 @@ public class BoundingBox{
     }
 
     //Broken
-    public static void rotate(BoundingBox _box, Vector2 _center, float _angle){
-        float s = (float)Math.sin(_angle);
-        float c = (float)Math.cos(_angle);
+    public void rotate(Vector2 _center, double _angle){
+        double s = Math.sin(_angle);
+        double c = Math.cos(_angle);
 
-        for (int i = 0;i<_box.vertices.length;i++ ){
-            _box.vertices[i].x = _box.vertices[i].x - _center.x;
-            _box.vertices[i].y = _box.vertices[i].y - _center.y;
-            _box.vertices[i].x = (_box.vertices[i].x * c) - (_box.vertices[i].y * s);
-            _box.vertices[i].y = (_box.vertices[i].x * s) - (_box.vertices[i].y * c);
-            _box.vertices[i].x = _box.vertices[i].x + _center.x;
-            _box.vertices[i].y = _box.vertices[i].y + _center.y;
+        for (int i = 0;i<this.vertices.length;i++ ){
+            this.vertices[i].x = (float)((this.vertices[i].x * c) - (this.vertices[i].y * s));
+            this.vertices[i].y = (float)((this.vertices[i].x * s) + (this.vertices[i].y * c)); 
         }
     }
 
