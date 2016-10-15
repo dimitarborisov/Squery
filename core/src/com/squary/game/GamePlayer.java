@@ -74,11 +74,11 @@ public class GamePlayer extends GameEntities {
 	}
 	
 	public float getX(){
-		return x;
+		return body.bounds.position.x;
 	}
 	
 	public float getY(){
-		return y;
+		return body.bounds.position.y;
 	}
 	
 	public int getSize(){

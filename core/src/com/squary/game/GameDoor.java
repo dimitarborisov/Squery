@@ -1,9 +1,12 @@
 package com.squary.game;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.squary.game.Alisquare.BoundingBox;
+import com.squary.game.Alisquare.RigidBody;
+import com.squary.game.Alisquare.Vector2;
 
 public class GameDoor extends GameEntities {
-
+	public RigidBody body;
 	boolean locked;
 	Sprite doorSprite;
 	Sprite lockSprite;
@@ -14,6 +17,8 @@ public class GameDoor extends GameEntities {
 		locked = true;
 		
 		doorSprite = new Sprite(game.getTextureManager().getTexture("locked_door"));
+		body = new RigidBody(BoundingBox.createRegularPolygon(4,new Vector2(290,290),(int)sizeX-5,(float)Math.PI/4),true,10,1);
+
 	}
 
 	@Override
@@ -30,8 +35,8 @@ public class GameDoor extends GameEntities {
 
 	@Override
 	public void update(float dt) {
-		doorSprite.setX(x);
-		doorSprite.setY(y);
+		doorSprite.setX(body.bounds.position.x);
+		doorSprite.setY(body.bounds.position.y);
 		doorSprite.setSize(sizeX, sizeY);
 
 	}
@@ -45,16 +50,16 @@ public class GameDoor extends GameEntities {
 	}
 	
 	public void setPosY(float y){
-		this.y = y;
+		body.bounds.position.y = y;
 	}
 	
 	public void setPosX(float x){
-		this.x = x;
+		body.bounds.position.x = x;
 	}
 	
 	public void setPos(float x, float y){
-		this.x = x;
-		this.y = y;
+		body.bounds.position.x = x;
+		body.bounds.position.y = y;
 	}
 	
 	public void setSize(float width, float height){
