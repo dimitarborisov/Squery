@@ -1,6 +1,7 @@
 package com.squary.game.Alisquare;
 
 import com.squary.game.GameBoard;
+import com.squary.game.GameEnemy;
 import com.squary.game.GameEntities;
 import com.squary.game.GamePlayer;
 import com.squary.game.GameWall;
@@ -15,8 +16,8 @@ public class PhysicsHandler {
     public ArrayList<Collision> collisions;
 
     public PhysicsHandler(GamePlayer _player, GameBoard _board){
-        List<GameEntities> walls = _board.getWalls();
-        List<GameEntities> enemies = _board.getEnemies();
+        List<GameWall> walls = _board.getWalls();
+        List<GameEnemy> enemies = _board.getEnemies();
         collisions = new ArrayList<Collision>();
 
         for (GameEntities wall: walls){

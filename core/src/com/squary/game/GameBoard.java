@@ -8,8 +8,8 @@ import java.util.List;
 public class GameBoard {
 	
 	private static final int SIZE = 27;
-	private static final int WALLFACTOR = 15; // the higher this is the less walls there are
-	private static final int ENEMYFACTOR = 15; // the higher this is the less enemies there are
+	private static final int WALLFACTOR = 25; // the higher this is the less walls there are
+	private static final int ENEMYFACTOR = 80; // the higher this is the less enemies there are
 //	private int [][] board; // not really gonna be used...
 	//0 = empty; 1=wall, 2=enemy
 
