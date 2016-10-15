@@ -9,12 +9,16 @@ public class Play extends GameState {
 	public static int STATE = -1;
 
 	GamePlayer player;
+	GameWall[] gameWalls;
+	
 	InputProcessor inputProcessor;
 
 	protected Play(GameStateManager gsm) {
 		super(gsm);
-
+		gameWalls = new GameWall[10];
 		player = new GamePlayer(game);
+
+		
 
 		inputProcessor = new InputProcessor() {
 

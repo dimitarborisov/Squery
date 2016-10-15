@@ -1,7 +1,7 @@
 package com.squary.game;
 
 public abstract class GameEntities {
-	protected int x,y;
+	protected float x,y;
 	protected boolean visible;
 	protected GameSquary game;
 	
