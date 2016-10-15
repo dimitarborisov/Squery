@@ -108,25 +108,9 @@ public class Collision{
         	} else {
         		return new Vector2(0,0);
         	}
-
-//            if(minX1< minX2 && minX2<maxX1){
-//
-//            }
-
-            //Check X axis overlap
-            //if((minX1 <= maxX2 && minX2 <= maxX1)){
-            //    xOverlap = maxX1-minX2;
-
-           // }
-            //Check Y axis overlap
-            //if((minY1 <= maxY2 && minY2 <= maxY1)){
-             //   yOverlap = maxY1-minY2;
-            //}
         } else {
             throw new BoundingBoxException("Axis Aligned Collisions can only be between rectangles");
         }
-//        System.out.println(xOverlap+","+yOverlap);
-//        return new Vector2(xOverlap, yOverlap);
     }
     
 }

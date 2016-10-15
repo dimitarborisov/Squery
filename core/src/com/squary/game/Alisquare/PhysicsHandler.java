@@ -24,7 +24,7 @@ public class PhysicsHandler {
         for (GameEntities wall: walls){
             Vector2 col = Collision.AACheck(_player.body.bounds,wall.getBody().bounds);
             if (!col.equals(new Vector2(0,0))){
-                _player.body.bounds.position.subtract(col);
+                _player.body.bounds.position = _player.body.bounds.position.add(col);
             }
         }
 
