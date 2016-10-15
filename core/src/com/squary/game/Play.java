@@ -180,6 +180,23 @@ public class Play extends GameState {
 			gameDoors[i].update(dt);
 		}
 
+		
+		if(player.getX() + player.getSize() >= GameSquary.VWIDTH){
+			System.out.println("HIT RIGHT border");
+		}
+		
+		if(player.getX() <= 0){
+			System.out.println("HIT left border");
+		}
+		
+		if(player.getY() <= 0){
+			System.out.println("Hit the bottom");
+		}
+		
+		if(player.getY() + player.getSize() >= GameSquary.VHEIGHT){
+			System.out.println("Hit the top");
+		}
+		
 	}
 
 	@Override

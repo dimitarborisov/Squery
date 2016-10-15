@@ -58,5 +58,17 @@ public class GamePlayer extends GameEntities {
 	public void setDy(float y){
 		dy = y;
 	}
+	
+	public float getX(){
+		return x;
+	}
+	
+	public float getY(){
+		return y;
+	}
+	
+	public int getSize(){
+		return size;
+	}
 
 }
