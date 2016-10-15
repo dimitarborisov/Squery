@@ -39,14 +39,7 @@ public class GameWall extends GameEntities {
 	public void setSizeY(float size){
 		sizeY = size;
 	}
-	
-	public void setPosY(float y){
-		this.y = y;
-	}
-	
-	public void setPosX(float x){
-		this.x = x;
-	}
+
 	
 	public void setPos(float x, float y){
 		this.x = x;

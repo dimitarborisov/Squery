@@ -40,4 +40,21 @@ public class Vector2 {
     public String toString(){
         return "(" + x + "," + y + ")";
     }
+
+    public static float[] toFloatArray(Vector2[] _vertices){
+        return toFloatArray(_vertices,new Vector2(0,0));
+    }
+
+    public static float[] toFloatArray(Vector2[] _vertices,Vector2 _translation) {
+        float[] result = new float[_vertices.length*2];
+        int i = 0;
+        int j = 0;
+        while (i < _vertices.length){
+            result[j] = _vertices[i].x + _translation.x;
+            result[j+1] = _vertices[i].y + _translation.y;
+            i++;
+            j=j+2;
+        }
+        return result;
+    }
 }

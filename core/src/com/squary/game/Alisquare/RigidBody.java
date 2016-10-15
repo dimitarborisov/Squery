@@ -12,6 +12,7 @@ public class RigidBody {
 
 
     public RigidBody(BoundingBox _box, boolean _static, float _mass, float _elasticity){
+        velocity = new Vector2(0,0);
         mass = _mass;
         isStatic = _static;
         bounds = _box;

@@ -1,31 +1,36 @@
 package com.squary.game;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.squary.game.Alisquare.BoundingBox;
+import com.squary.game.Alisquare.RigidBody;
+import com.squary.game.Alisquare.Vector2;
 
 public class GamePlayer extends GameEntities {
-	
+
+
 	private Sprite playerSprite;
 	private int size = 20;
-	private float dx,dy;
+	private RigidBody body;
 	
 	public GamePlayer(GameSquary game) {
 		super(game);
-		
-		dx = 0;
-		dy = 0;
-		
+
 		playerSprite = new Sprite(game.getTextureManager().getTexture("player"));
+		body = new RigidBody(BoundingBox.createRegularPolygon(4,new Vector2(290,290),size-5,(float)Math.PI/4),true,10,1);
 		super.visible = true;
-		x = 290;
-		y = 290;
-		
+
+        playerSprite.setOriginCenter();
 		playerSprite.setSize(size, size);
-		playerSprite.setX(x);
-		playerSprite.setY(y);
 	}
+
+
 
 	@Override
 	public void render() {
+        if (GameSquary.debug == true){
+            debugRender();
+        }
 		game.getSpriteBatch().begin();
 		
 		playerSprite.draw(game.getSpriteBatch());
@@ -33,30 +38,39 @@ public class GamePlayer extends GameEntities {
 		game.getSpriteBatch().end();
 	}
 
+	private void debugRender(){
+        game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Line);
+
+        game.getShapeRenderer().polygon(Vector2.toFloatArray(body.bounds.vertices,body.bounds.position));
+
+        game.getShapeRenderer().end();
+    }
+
 	@Override
 	public void update(float dt) {
-		x += dx;
-		y += dy;
-		
-		playerSprite.setX(x);
-		playerSprite.setY(y);
+        if (body != null && playerSprite != null){
+            body.bounds.position.x += body.velocity.x;
+            body.bounds.position.y += body.velocity.y;
 
+			playerSprite.setX(body.bounds.position.x-(playerSprite.getWidth()/2));
+			playerSprite.setY(body.bounds.position.y-(playerSprite.getHeight()/2));
+        }
 	}
 	
 	public float getDx(){
-		return dx;
+		return body.velocity.x;
 	}
 	
 	public float getDy(){
-		return dy;
+		return body.velocity.y;
 	}
 	
 	public void setDx(float x){
-		dx = x;
+		body.velocity.x = x;
 	}
 	
 	public void setDy(float y){
-		dy = y;
+		body.velocity.y = y;
 	}
 	
 	public float getX(){
