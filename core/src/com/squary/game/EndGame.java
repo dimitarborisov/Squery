@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -92,8 +93,11 @@ public class EndGame extends GameState {
 			@Override
 			public boolean keyDown(int keycode) {
 				Play.STATE = -1;
-				EndGame.this.getStateManager().setState(new FadeOutIn(EndGame.this.getStateManager(), EndGame.this,
-						new Menu(EndGame.this.getStateManager()), false, false));
+				if(keycode == Keys.ENTER){
+					EndGame.this.getStateManager().setState(new FadeOutIn(EndGame.this.getStateManager(), EndGame.this,
+							new Menu(EndGame.this.getStateManager()), false, false));
+				}
+				
 				return false;
 			}
 
