@@ -136,6 +136,10 @@ public class Play extends GameState {
 					player.setDy(player.getDy() - playerSpeed);
 				}
 
+				if (keycode == Keys.SPACE){
+
+                }
+
 				return true;
 			}
 

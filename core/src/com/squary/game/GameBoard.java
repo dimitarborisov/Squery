@@ -1,12 +1,13 @@
 package com.squary.game;
 
+import com.squary.game.Alisquare.RigidBody;
 import com.squary.game.Alisquare.Vector2;
+import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameBoard {
-	
 	private static final int SIZE = 17;
 	private static final int WALLFACTOR = 15; // the higher this is the less walls there are
 	private static final int ENEMYFACTOR = 50; // the higher this is the less enemies there are
@@ -15,6 +16,7 @@ public class GameBoard {
 
 	private List<GameWall> walls;
 	private List<GameEnemy> enemies;
+	private List<DamageArea> damageAreas;
 	private GamePlayer player;
 	private GameSquary game;
 	
@@ -81,5 +83,6 @@ public class GameBoard {
 			enemy.render();
 		}
 	}
+
 	
 }
