@@ -9,7 +9,7 @@ import java.util.List;
 public class GameBoard {
 	private static final int SIZE = 17;
 	private static final int WALLFACTOR = 15; // the higher this is the less walls there are
-	private static final int ENEMYFACTOR = 50; // the higher this is the less enemies there are
+	private static final int ENEMYFACTOR = 80; // the higher this is the less enemies there are
 //	private int [][] board; // not really gonna be used...
 	//0 = empty; 1=wall, 2=enemy
 
@@ -19,12 +19,13 @@ public class GameBoard {
 	private GamePlayer player;
 	private GameSquary game;
 	
-	public GameBoard(GameSquary game) {
+	public GameBoard(GameSquary game, GamePlayer player) {
 //		board  = new int[SIZE][SIZE];
 		walls = new ArrayList<GameWall>();
 		enemies = new ArrayList<GameEnemy>();
         damageAreas = new ArrayList<DamageArea>();
 		this.game = game;
+		this.player = player;
 	}
 	
 	public void initialize() {
@@ -39,13 +40,18 @@ public class GameBoard {
 					walls.add(temp);
 					continue;
 				}
-				if (rand2 == 1) {
+				if (rand2 == 1 || rand2 ==2) {
 					GameEnemy temp = new GameEnemyStationary(this.game);
 					temp.setPos(i*30+45, j*30+45);
 					temp.setSize(20,20);
 					enemies.add(temp);
-				} else if (rand2 ==2) {
+				} else if (rand2 ==3 || rand2 ==4) {
 					GameEnemy temp = new GameEnemyRandom(this.game);
+					temp.setPos(i*30+45, j*30+45);
+					temp.setSize(20,20);
+					enemies.add(temp);
+				} else if (rand2 ==5) {
+					GameEnemy temp = new GameEnemyCharging(this.game, this.player);
 					temp.setPos(i*30+45, j*30+45);
 					temp.setSize(20,20);
 					enemies.add(temp);
