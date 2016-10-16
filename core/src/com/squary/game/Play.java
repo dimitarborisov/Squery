@@ -19,6 +19,7 @@ public class Play extends GameState {
 	private GameDoor[] gameDoors;
 	
 	private float playerSpeed = 5;
+    private float playerCooldown = 0;
 	
 	Sprite background;
 	
@@ -139,9 +140,12 @@ public class Play extends GameState {
 				}
 
 				if (keycode == Keys.SPACE){
-                    PlayerAttack tempAttack = new PlayerAttack(game);
-                    gameBoard.addDamageArea(tempAttack);
-                    tempAttack.getBody().setPos(player.body.bounds.position);
+                    if (playerCooldown <= 0){
+                        PlayerAttack tempAttack = new PlayerAttack(game);
+                        gameBoard.addDamageArea(tempAttack);
+                        tempAttack.getBody().setPos(player.body.bounds.position);
+                        playerCooldown = 80;
+                    }
 
                 }
 
@@ -223,6 +227,10 @@ public class Play extends GameState {
 	public void update(float dt) {
         //Collision checks and damage to player and enemies
 		PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
+        if (!handler.isPlayerAlive()){
+            //TODO kill player 
+        }
+        playerCooldown --;
 		player.setIsCollidingOnX(handler.isCollidingOnX());
 		player.setIsCollidingOnY(handler.isCollidingOnY());
 		player.update(dt);

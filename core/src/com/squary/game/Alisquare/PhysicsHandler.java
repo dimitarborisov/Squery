@@ -14,6 +14,7 @@ public class PhysicsHandler {
     private boolean resolved = false;
     private boolean collidingOnX;
     private boolean collidingOnY;
+    private boolean playerAlive = true;
 
     public PhysicsHandler(GamePlayer _player, GameBoard _board){
         List<GameWall> walls = _board.getWalls();
@@ -63,6 +64,11 @@ public class PhysicsHandler {
             }
         }
 
+        for (GameEnemy enemy: enemies){
+            if (Collision.SACheck(_player.getBody().bounds,enemy.getBody().bounds)) {
+                playerAlive = false;
+            }
+        }
         ArrayList<GameEnemy> taggedToKill = new ArrayList<GameEnemy>();
         for (DamageArea area:areas){
             for (GameEnemy enemy:enemies){
@@ -72,6 +78,7 @@ public class PhysicsHandler {
         for (GameEnemy enemy: taggedToKill){
             enemies.remove(enemy);
         }
+
         for (GameEntities wall: walls){
             Vector2 col = Collision.AACheck(_player.body.bounds,wall.getBody().bounds);
             if (!col.equals(new Vector2(0,0))){
@@ -98,6 +105,10 @@ public class PhysicsHandler {
                 
             }
         }
+    }
+
+    public boolean isPlayerAlive(){
+        return playerAlive;
     }
     
     public boolean isCollidingOnX() {
