@@ -21,20 +21,20 @@ public class GameEnemyRandom extends GameEnemy {
 	public void update(float dt) {
 		// determine new position based on randomness
 		double change = 0;
-		if (Math.random()<0.5) {
+		if (Math.random()<0.3) {
 			body.bounds.position.x += Math.cos(angleTheta)*SPEED;
 			body.bounds.position.y += Math.sin(angleTheta)*SPEED;
 		} else {
-			change = (Math.random()-0.5)*Math.PI;
+			change = (Math.random()-0.5)*Math.PI/15;	
+			angleTheta += change;
+	        enemySprite.setOriginCenter();
+			enemySprite.rotate((float)Math.toDegrees(change));
+//			enemySprite.rotate(10);
+			//enemySprite.rotate((float)angleTheta);
+//			this.body.bounds.rotate(new Vector2(0,0), change);
+//			this.body.bounds.rotate(new Vector2(0,0), 10);
+	        //enemySprite.setRotation(0.01f);
 		}
-
-		angleTheta += change;
-        enemySprite.setOriginCenter();
-		enemySprite.rotate((float)Math.toDegrees(0.01d));
-		//enemySprite.rotate((float)angleTheta);
-		this.body.bounds.rotate(new Vector2(0,0), 0.01f);
-        //enemySprite.setRotation(0.01f);
-
 
 
         // render at new position
