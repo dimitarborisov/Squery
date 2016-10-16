@@ -23,7 +23,7 @@ public class GameWall extends GameEntities {
     public GameWall(GameSquary game,Vector2 _size,float _rotation) {
         super(game);
 
-        wallSprite = new Sprite(game.getTextureManager().getTexture("wall"));
+        wallSprite = new Sprite(game.getTextureManager().getTexture("playwall"));
         body = new RigidBody(BoundingBox.createRegularPolygon(4,new Vector2(0,0),(int)_size.x-5,_rotation),true,10,1);
         wallSprite.setSize(_size.x, _size.y);
 

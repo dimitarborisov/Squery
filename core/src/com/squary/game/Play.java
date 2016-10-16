@@ -44,7 +44,6 @@ public class Play extends GameState {
 
 
 		//set background
-        System.out.println(themeID);
         game.getTextureManager().loadTexture("playbackground", "themes/"+themeID+"/background.png");
         game.getTextureManager().loadTexture("playwall", "themes/"+themeID+"/walls.png");
 		background = new Sprite(game.getTextureManager().getTexture("playbackground"));
