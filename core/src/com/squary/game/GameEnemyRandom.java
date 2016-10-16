@@ -35,7 +35,16 @@ public class GameEnemyRandom extends GameEnemy {
 //			this.body.bounds.rotate(new Vector2(0,0), 10);
 	        //enemySprite.setRotation(0.01f);
 		}
-
+		// if going outside of field, get the enemy to turn around
+		float x = this.getBody().bounds.position.x;
+		float y = this.getBody().bounds.position.y;
+		if (x<35 || x>565 || y<35 || y>565){
+			angleTheta += Math.PI;
+			while (x<35 || x>565 || y<35 || y>565) {
+				x = body.bounds.position.x += Math.cos(angleTheta);
+				y = body.bounds.position.y += Math.sin(angleTheta);
+			}
+		}
 
         // render at new position
 		enemySprite.setX(body.bounds.position.x - 9);//enemySprite.getHeight() instead of 10
