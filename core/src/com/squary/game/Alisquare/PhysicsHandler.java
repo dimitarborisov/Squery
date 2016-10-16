@@ -46,7 +46,6 @@ public class PhysicsHandler {
 	        		(_player.getY()<270 || _player.getY()>330)){
 	        	if(_player.getDx()>0) collidingOnX = true;
 	        }
-	        
         } else {
         	// Bottom
         	if (_player.getY()<35){ 
