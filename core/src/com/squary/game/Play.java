@@ -14,7 +14,7 @@ import com.squary.game.Alisquare.Vector2;
 public class Play extends GameState {
 	public static int STATE = -1;
 
-	public static int score = 0;
+	public int score = 0;
 	private GamePlayer player;
 	private GameWall[] gameWalls;
 	private GameBoard gameBoard;
