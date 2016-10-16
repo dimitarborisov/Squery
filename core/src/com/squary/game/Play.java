@@ -3,6 +3,7 @@ package com.squary.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.squary.game.Alisquare.BoundingBox;
@@ -31,6 +32,9 @@ public class Play extends GameState {
 
 	protected Play(GameStateManager gsm) {
 		super(gsm);
+
+        //load audio
+        final Sound playerAttackSound = Gdx.audio.newSound(Gdx.files.internal("PlayerAttack.wav"));
 		
 		//set background
 		background = new Sprite(game.getTextureManager().getTexture("background"));
@@ -141,6 +145,7 @@ public class Play extends GameState {
 
 				if (keycode == Keys.SPACE){
                     if (playerCooldown <= 0){
+                        playerAttackSound.play();
                         PlayerAttack tempAttack = new PlayerAttack(game);
                         gameBoard.addDamageArea(tempAttack);
                         tempAttack.getBody().setPos(player.body.bounds.position);

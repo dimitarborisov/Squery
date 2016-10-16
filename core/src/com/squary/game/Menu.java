@@ -2,6 +2,7 @@ package com.squary.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
@@ -21,6 +22,9 @@ public class Menu extends GameState {
 	Sprite playButton;
 	Sprite optionsButton;
 	Sprite exitButtonSprite;
+
+	//load audio
+	final Sound buttonClickSound = Gdx.audio.newSound(Gdx.files.internal("ButtonClick2.wav"));
 	
 	InputProcessor inputProcessor;
 	
@@ -171,6 +175,7 @@ public class Menu extends GameState {
 		}
 		
 		if(startButton.isClicked()){
+            buttonClickSound.play();
 			getStateManager().setState(new FadeOutIn(getStateManager(), this, new Play(getStateManager()), false, false));
 		}
 	}

@@ -2,6 +2,7 @@ package com.squary.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -14,6 +15,9 @@ public class Splash extends GameState {
 	int x,y;
 	InputProcessor inputProcessor;
 	private final TweenManager tweenManager = new TweenManager();
+
+	//load audio
+	final Sound splashSkipSound = Gdx.audio.newSound(Gdx.files.internal("ButtonClick3.wav"));
 	
 	Sprite logo, logoBox, logoBox0, logoBox1, logoBox2, logoBox3, logoBackground;
 	
@@ -71,6 +75,7 @@ public class Splash extends GameState {
 			@Override
 			public boolean keyUp(int keycode) {
 				Splash.this.getStateManager().setState(new FadeOutIn(Splash.this.getStateManager(), Splash.this, new Menu(Splash.this.getStateManager()), false, false));
+				splashSkipSound.play();
 				
 				return false;
 			}
