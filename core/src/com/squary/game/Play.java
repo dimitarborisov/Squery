@@ -3,6 +3,7 @@ package com.squary.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -30,12 +31,16 @@ public class Play extends GameState {
 	boolean up = false, down = false, left = false, right = false;
 	InputProcessor inputProcessor;
 
+    //load audio
+    final Sound playerAttackSound = Gdx.audio.newSound(Gdx.files.internal("PlayerAttack.wav"));
+    final Sound gameOverSound = Gdx.audio.newSound(Gdx.files.internal("GameOver.wav"));
+    final Sound doorSound = Gdx.audio.newSound(Gdx.files.internal("Door.wav"));
+
+
 	protected Play(GameStateManager gsm) {
 		super(gsm);
 
-        //load audio
-        final Sound playerAttackSound = Gdx.audio.newSound(Gdx.files.internal("PlayerAttack.wav"));
-		
+
 		//set background
 		background = new Sprite(game.getTextureManager().getTexture("background"));
 		background.setSize(600, 600);
@@ -243,6 +248,7 @@ public class Play extends GameState {
         //Collision checks and damage to player and enemies
 		PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
         if (!handler.isPlayerAlive()){
+            gameOverSound.play();
             endGame();
         }
         score += (handler.getEnemiesKilled() * 10);
@@ -265,8 +271,11 @@ public class Play extends GameState {
 
 		if(player.getX() + (player.getSize()/2) >= GameSquary.VWIDTH){
 			//System.out.println("HIT RIGHT border");
+            doorSound.play();
 			Play.STATE = 1;
 			Gdx.input.setInputProcessor(null);
+
+
 
 			getStateManager().setState(new RightToLeft(getStateManager(), this, new Play(getStateManager()), false, false));
 			
@@ -274,6 +283,7 @@ public class Play extends GameState {
 		
 		if(player.getX() <= 0){
 			//System.out.println("HIT left border");
+            doorSound.play();
 			Play.STATE = 2;
 			Gdx.input.setInputProcessor(null);
 			getStateManager().setState(new LeftToRight(getStateManager(), this, new Play(getStateManager()), false, false));
@@ -281,6 +291,7 @@ public class Play extends GameState {
 		
 		if(player.getY() <= 0){
 			//System.out.println("Hit the bottom");
+            doorSound.play();
 			Play.STATE = 3;
 			Gdx.input.setInputProcessor(null);
 			getStateManager().setState(new BottomToTop(getStateManager(), this, new Play(getStateManager()), false, false));
@@ -288,6 +299,7 @@ public class Play extends GameState {
 		
 		if(player.getY() + (player.getSize()/2) >= GameSquary.VHEIGHT){
 			//System.out.println("Hit the top");
+            doorSound.play();
 			Play.STATE = 4;
 			Gdx.input.setInputProcessor(null);
 			getStateManager().setState(new TopToBottom(getStateManager(), this, new Play(getStateManager()), false, false));
