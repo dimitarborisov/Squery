@@ -234,12 +234,13 @@ public class Play extends GameState {
 				gameDoors[i].setVisibility(false);
 			}
 		}
-		
+
         //Collision checks and damage to player and enemies
 		PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
         if (!handler.isPlayerAlive()){
             endGame();
         }
+        score += (handler.getEnemiesKilled() * 10);
         playerCooldown --;
 		player.setIsCollidingOnX(handler.isCollidingOnX());
 		player.setIsCollidingOnY(handler.isCollidingOnY());
