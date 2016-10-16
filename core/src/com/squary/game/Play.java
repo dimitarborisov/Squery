@@ -204,6 +204,7 @@ public class Play extends GameState {
 
 	@Override
 	public void update(float dt) {
+		PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
 		player.update(dt);
 
 		for (int i = 0; i < 8; i++) {
@@ -216,7 +217,7 @@ public class Play extends GameState {
 
 		gameBoard.update(dt);
 
-        PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
+
 
 		if(player.getX() + player.getSize() >= GameSquary.VWIDTH){
 			//System.out.println("HIT RIGHT border");
