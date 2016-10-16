@@ -6,7 +6,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.squary.game.Alisquare.BoundingBox;
-import com.squary.game.Alisquare.Collision;
 import com.squary.game.Alisquare.PhysicsHandler;
 import com.squary.game.Alisquare.Vector2;
 
@@ -114,22 +113,22 @@ public class Play extends GameState {
 
 			@Override
 			public boolean keyDown(int keycode) {
-				if (keycode == Keys.D) {
+				if (keycode == Keys.D || keycode == Keys.RIGHT) {
 					uno = true;
 					player.setDx(player.getDx() + playerSpeed);
 				}
 
-				if (keycode == Keys.A) {
+				if (keycode == Keys.A || keycode == Keys.LEFT) {
 					uno = true;
 					player.setDx(player.getDx() - playerSpeed);
 				}
 
-				if (keycode == Keys.W) {
+				if (keycode == Keys.W || keycode == Keys.UP) {
 					dos = true;
 					player.setDy(player.getDy() + playerSpeed);
 				}
 
-				if (keycode == Keys.S) {
+				if (keycode == Keys.S || keycode == Keys.DOWN) {
 					dos = true;
 					player.setDy(player.getDy() - playerSpeed);
 				}
@@ -139,27 +138,27 @@ public class Play extends GameState {
 
 			@Override
 			public boolean keyUp(int keycode) {
-				if (keycode == Keys.D) {
+				if (keycode == Keys.D || keycode == Keys.RIGHT) {
 					if(uno){
 						player.setDx(player.getDx() - playerSpeed);
 					}
 					
 				}
 
-				if (keycode == Keys.A) {
+				if (keycode == Keys.A || keycode == Keys.LEFT) {
 					if(uno){
 						player.setDx(player.getDx() + playerSpeed);
 					}
 				}
 
-				if (keycode == Keys.W) {
+				if (keycode == Keys.W || keycode == Keys.UP) {
 					if(dos){
 						player.setDy(player.getDy() - playerSpeed);
 					}
 					
 				}
 
-				if (keycode == Keys.S) {
+				if (keycode == Keys.S || keycode == Keys.DOWN) {
 					if(dos){
 						player.setDy(player.getDy() + playerSpeed);
 					}

@@ -2,6 +2,7 @@ package com.squary.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 
@@ -17,6 +18,9 @@ public class Menu extends GameState {
 	SpriteButton exitButton;
 	Sprite menuBackground;
 	Sprite logoSprite;
+	Sprite playButton;
+	Sprite optionsButton;
+	Sprite exitButtonSprite;
 	
 	InputProcessor inputProcessor;
 	
@@ -27,6 +31,24 @@ public class Menu extends GameState {
 		logoSprite.setPosition(GameSquary.VWIDTH, GameSquary.VHEIGHT);
 		logoSprite.setAlpha(1);
 		logoSprite.setOriginCenter();
+		
+		Texture texture = game.getTextureManager().getTexture("playbutton2");
+		//texture.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear);
+		playButton = new Sprite(texture);
+		playButton.setSize(36, 36);
+		playButton.setPosition(-40, 157);
+		
+		texture = game.getTextureManager().getTexture("optionsButton");
+		//texture.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear);
+		optionsButton = new Sprite(texture);
+		optionsButton.setSize(36, 36);
+		optionsButton.setPosition(-40, 107);
+		
+		texture = game.getTextureManager().getTexture("exitButton");
+		//texture.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear);
+		exitButtonSprite = new Sprite(texture);
+		exitButtonSprite.setSize(36, 36);
+		exitButtonSprite.setPosition(-40, 57);
 		
 		startButton = new SpriteButton(new Sprite(game.getTextureManager().getTexture("logo2-e2")), 200, 50, -200, 150);
 		otherButton = new SpriteButton(new Sprite(game.getTextureManager().getTexture("yellow")), 150, 50, -150, 100);
@@ -50,6 +72,12 @@ public class Menu extends GameState {
 		Tween.to(startButton.getSprite(), TweenEngineSprite.POS_XY, 1.5f)
 				.targetRelative(200, 0)
 				.delay(0.7f)
+				.ease(TweenEquations.easeOutCubic)
+				.start(tweenManager);
+		
+		Tween.to(playButton, TweenEngineSprite.POS_XY, 1.5f)
+				.targetRelative(190, 0)
+				.delay(0.8f)
 				.ease(TweenEquations.easeOutCubic)
 				.start(tweenManager);
 		
@@ -146,6 +174,9 @@ public class Menu extends GameState {
 		otherButton.render(sb);
 		exitButton.render(sb);
 		
+		sb.begin();
+		playButton.draw(sb);
+		sb.end();
 	}
 
 	@Override
