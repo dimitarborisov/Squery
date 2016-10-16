@@ -238,7 +238,7 @@ public class Play extends GameState {
         //Collision checks and damage to player and enemies
 		PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
         if (!handler.isPlayerAlive()){
-            //TODO kill player 
+            endGame();
         }
         playerCooldown --;
 		player.setIsCollidingOnX(handler.isCollidingOnX());
