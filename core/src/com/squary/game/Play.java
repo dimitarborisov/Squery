@@ -16,7 +16,7 @@ import java.util.Random;
 public class Play extends GameState {
 	public static int STATE = -1;
 
-	public int score = 0;
+	public static int score = 0;
 	private GamePlayer player;
 	private GameWall[] gameWalls;
 	private GameBoard gameBoard;
@@ -201,7 +201,7 @@ public class Play extends GameState {
 				if (keycode == Keys.BACKSPACE) {
 					Play.this.getStateManager().setState(new FadeOutIn(Play.this.getStateManager(), Play.this,
 							new Menu(Play.this.getStateManager()), false, false));
-
+                    score = 0;
 				}
 
 				return true;
@@ -361,6 +361,7 @@ public class Play extends GameState {
 	private void endGame(){
 		this.gameBoard.resetLevel();
 		EndGame.SCORE = score;
+        score = 0;
 		getStateManager().setState(new FadeOutIn(getStateManager(), this, new EndGame(getStateManager()), false, false));
 	}
 }
