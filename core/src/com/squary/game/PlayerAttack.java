@@ -9,12 +9,12 @@ import com.squary.game.Alisquare.Vector2;
 /**
  * Created by Alistair
  */
-public class PlayerAttack extends GameEntities implements DamageArea {
+public class PlayerAttack extends DamageArea {
     private RigidBody body;
     private int scale;
     private Sprite circleSprite;
 
-    public PlayerAttack(GameSquary game) {
+    public PlayerAttack(GameSquary game, Vector2 position) {
         super(game);
         scale = 100;
         BoundingBox bB = BoundingBox.createRegularPolygon(8,new Vector2(0,0),scale);
@@ -48,7 +48,7 @@ public class PlayerAttack extends GameEntities implements DamageArea {
 
     @Override
     public void update(float dt) {
-
+        
     }
 
     @Override
@@ -56,13 +56,4 @@ public class PlayerAttack extends GameEntities implements DamageArea {
         return body;
     }
 
-    @Override
-    public void updateDecay() {
-
-    }
-
-    @Override
-    public void doDamage(GameEntities _entity) {
-
-    }
 }

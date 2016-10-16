@@ -15,6 +15,4 @@ public abstract class GameEntities {
 	public abstract void update(float dt);
     public abstract RigidBody getBody();
 
-
-
 }

@@ -2,7 +2,6 @@ package com.squary.game;
 
 import com.squary.game.Alisquare.RigidBody;
 import com.squary.game.Alisquare.Vector2;
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ public class GameBoard {
 
 	private List<GameWall> walls;
 	private List<GameEnemy> enemies;
-	private List<DamageArea> damageAreas;
+	public List<DamageArea> damageAreas;
 	private GamePlayer player;
 	private GameSquary game;
 	
