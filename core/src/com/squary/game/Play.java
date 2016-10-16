@@ -52,6 +52,7 @@ public class Play extends GameState {
 
 		float wallspriteW = (gameWalls[0].wallSprite.getWidth()/2);
 		float wallspriteH = (gameWalls[0].wallSprite.getHeight()/2);
+
 		// bottom
 		gameWalls[0].setPos(0 + wallspriteW, 0 + wallspriteH);
 
@@ -287,6 +288,10 @@ public class Play extends GameState {
 		for(int i = 0; i < 4; i++){
 			gameDoors[i].render();
 		}
+	}
+	
+	public GameWall[] getGameWalls(){
+		return this.gameWalls;
 	}
 
 	@Override
