@@ -355,6 +355,7 @@ public class Play extends GameState {
 	}
 
 	private void endGame(){
+		this.gameBoard.resetLevel();
 		EndGame.SCORE = score;
 		getStateManager().setState(new FadeOutIn(getStateManager(), this, new EndGame(getStateManager()), false, false));
 	}
