@@ -12,6 +12,8 @@ public class GamePlayer extends GameEntities {
 	private Sprite playerSprite;
 	private int size = 20;
 	public RigidBody body;
+	private boolean collidingOnX;
+	private boolean collidingOnY;
 	
 	public GamePlayer(GameSquary game) {
 		super(game);
@@ -49,9 +51,12 @@ public class GamePlayer extends GameEntities {
 	@Override
 	public void update(float dt) {
         if (body != null && playerSprite != null){
-            body.bounds.position.x += body.velocity.x;
-            body.bounds.position.y += body.velocity.y;
-
+        	if (!collidingOnX) {
+	            body.bounds.position.x += body.velocity.x;
+        	}
+        	if (!collidingOnY) {
+	            body.bounds.position.y += body.velocity.y;
+        	}
 			playerSprite.setX(body.bounds.position.x-(playerSprite.getWidth()/2));
 			playerSprite.setY(body.bounds.position.y-(playerSprite.getHeight()/2));
         }
@@ -62,6 +67,13 @@ public class GamePlayer extends GameEntities {
         return body;
     }
 
+    public void setIsCollidingOnX(boolean isColliding) {
+    	this.collidingOnX = isColliding;
+    }
+    
+    public void setIsCollidingOnY(boolean isColliding) {
+    	this.collidingOnY = isColliding;
+    }
 
     public float getDx(){
 		return body.velocity.x;

@@ -81,6 +81,18 @@ public class Menu extends GameState {
 				.ease(TweenEquations.easeOutCubic)
 				.start(tweenManager);
 		
+		Tween.to(optionsButton, TweenEngineSprite.POS_XY, 1.5f)
+				.targetRelative(140, 0)
+				.delay(0.7f)
+				.ease(TweenEquations.easeOutCubic)
+				.start(tweenManager);
+		
+		Tween.to(exitButtonSprite, TweenEngineSprite.POS_XY, 1.5f)
+				.targetRelative(90, 0)
+				.delay(0.6f)
+				.ease(TweenEquations.easeOutCubic)
+				.start(tweenManager);
+		
 		Tween.to(logoSprite, TweenEngineSprite.POS_XY, 3f)
 				.target(200, 200)
 				.delay(2.2f)
@@ -176,6 +188,8 @@ public class Menu extends GameState {
 		
 		sb.begin();
 		playButton.draw(sb);
+		exitButtonSprite.draw(sb);
+		optionsButton.draw(sb);
 		sb.end();
 	}
 

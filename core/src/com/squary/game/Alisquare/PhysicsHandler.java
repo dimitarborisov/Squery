@@ -15,27 +15,35 @@ import java.util.List;
 public class PhysicsHandler {
     public ArrayList<Collision> collisions;
     private boolean resolved = false;
+    private boolean collidingOnX;
+    private boolean collidingOnY;
 
     public PhysicsHandler(GamePlayer _player, GameBoard _board){
         List<GameWall> walls = _board.getWalls();
         List<GameEnemy> enemies = _board.getEnemies();
         collisions = new ArrayList<Collision>();
+        collidingOnX = false;
+        collidingOnY = false;
 
         for (GameEntities wall: walls){
             Vector2 col = Collision.AACheck(_player.body.bounds,wall.getBody().bounds);
             if (!col.equals(new Vector2(0,0))){
-            	if (col.x>0 && col.x > Math.abs(col.y)){
-            		_player.setDx(0);
+            	if (col.x>0 && col.x >= Math.abs(col.y)){
+            		if (_player.getDx()<0) collidingOnX = true;
 //            		_player.body.bounds.position = 
 //            				_player.body.bounds.position.add(new Vector2(col.x,0));
             	}
-            	else if (col.x<0 && (-col.x) > Math.abs(col.y)) {
-            		_player.setDx(0);
+            	else if (col.x<0 && (-col.x) >= Math.abs(col.y)) {
+            		if (_player.getDx()>0) collidingOnX = true;
 //            		_player.body.bounds.position =
 //            				_player.body.bounds.position.add(new Vector2(0,col.y));
             	}
-            	else if (col.y>0 && col.y>Math.abs(col.x) || col.y<0 && (-col.y)>Math.abs(col.x)){
-            		_player.setDy(0);
+            	else if (col.y>0 && col.y>=Math.abs(col.x)){
+            		if (_player.getDy()<0) collidingOnY = true;
+            	}	
+            	else if (col.y<0 && (-col.y)>=Math.abs(col.x)){
+            		
+            		if (_player.getDy()>0) collidingOnY = true;
             	}
             	else {
             		System.out.println("Wtf is going on>!");
@@ -43,7 +51,13 @@ public class PhysicsHandler {
                 
             }
         }
-
-
+    }
+    
+    public boolean isCollidingOnX() {
+    	return this.collidingOnX;
+    }
+    
+    public boolean isCollidingOnY() {
+    	return this.collidingOnY;
     }
 }
