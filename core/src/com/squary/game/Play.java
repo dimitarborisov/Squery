@@ -213,6 +213,8 @@ public class Play extends GameState {
 	@Override
 	public void update(float dt) {
 		PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
+		player.setIsCollidingOnX(handler.isCollidingOnX());
+		player.setIsCollidingOnY(handler.isCollidingOnY());
 		player.update(dt);
 
 		for (int i = 0; i < 8; i++) {
