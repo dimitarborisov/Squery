@@ -21,8 +21,10 @@ public class Play extends GameState {
 	
 	Sprite background;
 	
+	boolean uno = false;
+	boolean dos = false;
 	
-	boolean uno, dos = false;
+	boolean up = false, down = false, left = false, right = false;
 	InputProcessor inputProcessor;
 
 	protected Play(GameStateManager gsm) {
@@ -110,9 +112,10 @@ public class Play extends GameState {
 		
 		// input processing
 		inputProcessor = new InputProcessor() {
-
+			
 			@Override
 			public boolean keyDown(int keycode) {
+
 				if (keycode == Keys.D || keycode == Keys.RIGHT) {
 					uno = true;
 					player.setDx(player.getDx() + playerSpeed);
@@ -162,7 +165,7 @@ public class Play extends GameState {
 					if(dos){
 						player.setDy(player.getDy() + playerSpeed);
 					}
-					
+
 				}
 
 				return true;
@@ -209,6 +212,7 @@ public class Play extends GameState {
 
 	@Override
 	public void update(float dt) {
+		PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
 		player.update(dt);
 
 		for (int i = 0; i < 8; i++) {
@@ -221,7 +225,7 @@ public class Play extends GameState {
 
 		gameBoard.update(dt);
 
-        PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
+
 
 		if(player.getX() + player.getSize() >= GameSquary.VWIDTH){
 			//System.out.println("HIT RIGHT border");
