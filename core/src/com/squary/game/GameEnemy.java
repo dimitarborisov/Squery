@@ -11,7 +11,7 @@ public abstract class GameEnemy extends GameEntities {
 	protected RigidBody body;
 	protected Sprite enemySprite;
 	protected float sizeX,sizeY;
-	
+	public boolean taggedToDie = false;
 	public GameEnemy(GameSquary game) {
 		super(game);
 		sizeX=20;
@@ -65,4 +65,9 @@ public abstract class GameEnemy extends GameEntities {
 	public RigidBody getBody() {
 		return body;
 	}
+
+    public void tagToKill() {
+		taggedToDie = true;
+
+    }
 }

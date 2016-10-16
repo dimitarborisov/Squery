@@ -15,7 +15,7 @@ public class GameBoard {
 
 	private List<GameWall> walls;
 	private List<GameEnemy> enemies;
-	public List<DamageArea> damageAreas;
+	private List<DamageArea> damageAreas;
 	private GamePlayer player;
 	private GameSquary game;
 	
@@ -75,6 +75,7 @@ public class GameBoard {
 		}
         for(DamageArea area: damageAreas){
             area.update(dt);
+            area.updateDecay();
         }
 	}
 	
@@ -91,5 +92,12 @@ public class GameBoard {
         }
 	}
 
-	
+
+    public List<DamageArea> getAreas() {
+        return damageAreas;
+    }
+
+    public void addDamageArea(DamageArea d){
+        damageAreas.add(d);
+    }
 }
