@@ -23,7 +23,7 @@ public class PhysicsHandler {
         collisions = new ArrayList<Collision>();
         collidingOnX = false;
         collidingOnY = false;
-
+        
         if (enemies.isEmpty()) {
 	        // Bottom
 	    	if (_player.getY()<35 && 
@@ -45,6 +45,7 @@ public class PhysicsHandler {
 	        		(_player.getY()<270 || _player.getY()>330)){
 	        	if(_player.getDx()>0) collidingOnX = true;
 	        }
+	        
         } else {
         	// Bottom
         	if (_player.getY()<35){ 

@@ -225,6 +225,16 @@ public class Play extends GameState {
 
 	@Override
 	public void update(float dt) {
+		if (gameBoard.anyMoreEnemies()) {
+			for (int i = 0; i < 4; i++) {
+				gameDoors[i].setVisibility(true);
+			}
+		} else {
+			for (int i = 0; i < 4; i++) {
+				gameDoors[i].setVisibility(false);
+			}
+		}
+		
         //Collision checks and damage to player and enemies
 		PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
         if (!handler.isPlayerAlive()){

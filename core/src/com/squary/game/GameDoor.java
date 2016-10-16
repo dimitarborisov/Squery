@@ -35,6 +35,11 @@ public class GameDoor extends GameEntities {
 
 	@Override
 	public void update(float dt) {
+		if (this.visible){
+			doorSprite.setAlpha(1);
+		} else {
+			doorSprite.setAlpha(0);
+		}
 		doorSprite.setX(body.bounds.position.x);
 		doorSprite.setY(body.bounds.position.y);
 		doorSprite.setSize(sizeX, sizeY);
@@ -71,6 +76,10 @@ public class GameDoor extends GameEntities {
 	public void setSize(float width, float height){
 		this.sizeX = width;
 		this.sizeY = height;
+	}
+	
+	public void setVisibility(boolean isVisible){
+		this.visible = isVisible;
 	}
 	
 	public boolean getLocked(){
