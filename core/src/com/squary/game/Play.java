@@ -23,7 +23,7 @@ public class Play extends GameState {
 	Sprite background;
 	
 	
-	boolean uno, dos = false;
+	boolean up = false, down = false, left = false, right = false;
 	InputProcessor inputProcessor;
 
 	protected Play(GameStateManager gsm) {
@@ -111,26 +111,27 @@ public class Play extends GameState {
 		
 		// input processing
 		inputProcessor = new InputProcessor() {
-
+			
 			@Override
 			public boolean keyDown(int keycode) {
-				if (keycode == Keys.D) {
-					uno = true;
+				
+				if (keycode == Keys.D && !left) {
+					right = true;
 					player.setDx(player.getDx() + playerSpeed);
 				}
 
-				if (keycode == Keys.A) {
-					uno = true;
+				if (keycode == Keys.A && !right) {
+					left = true;
 					player.setDx(player.getDx() - playerSpeed);
 				}
 
-				if (keycode == Keys.W) {
-					dos = true;
+				if (keycode == Keys.W && !down) {
+					up = true;
 					player.setDy(player.getDy() + playerSpeed);
 				}
 
-				if (keycode == Keys.S) {
-					dos = true;
+				if (keycode == Keys.S && !up) {
+					down = true;
 					player.setDy(player.getDy() - playerSpeed);
 				}
 
@@ -139,31 +140,24 @@ public class Play extends GameState {
 
 			@Override
 			public boolean keyUp(int keycode) {
-				if (keycode == Keys.D) {
-					if(uno){
-						player.setDx(player.getDx() - playerSpeed);
-					}
-					
+				if (keycode == Keys.D && right) {
+					player.setDx(0);
+					right = false;
 				}
 
-				if (keycode == Keys.A) {
-					if(uno){
-						player.setDx(player.getDx() + playerSpeed);
-					}
+				if (keycode == Keys.A && left) {
+					player.setDx(0);
+					left = false;
 				}
 
-				if (keycode == Keys.W) {
-					if(dos){
-						player.setDy(player.getDy() - playerSpeed);
-					}
-					
+				if (keycode == Keys.W && up) {
+					player.setDy(0);
+					up = false;
 				}
 
-				if (keycode == Keys.S) {
-					if(dos){
-						player.setDy(player.getDy() + playerSpeed);
-					}
-					
+				if (keycode == Keys.S && down) {
+					player.setDy(0);
+					down = false;
 				}
 
 				return true;

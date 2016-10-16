@@ -74,6 +74,8 @@ public class Collision{
         if(_shape1.rect && _shape2.rect){
         	
         	// find width and height
+        	float quadrantCheckX = Math.signum(_shape1.position.x - _shape2.position.x);
+        	float quadrantCheckY = Math.signum(_shape1.position.y - _shape2.position.y);
         	
             float x1 = _shape1.vertices[0].x+_shape1.position.x;
             float x2 = _shape1.vertices[2].x+_shape1.position.x;
@@ -104,7 +106,8 @@ public class Collision{
                   && (actualYdist < totalHeight);
 
         	if (isOverlap){
-        		return new Vector2(totalWidth-actualXdist,totalHeight-actualYdist);
+        		return new Vector2(quadrantCheckX * actualXdist,
+        							quadrantCheckY * actualYdist);//this might be really r*t*rded
         	} else {
         		return new Vector2(0,0);
         	}
