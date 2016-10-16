@@ -19,7 +19,7 @@ public class Play extends GameState {
 	private GameBoard gameBoard;
 	private GameDoor[] gameDoors;
 	
-	private float playerSpeed = 5;
+	private float playerSpeed = 4;
     private float playerCooldown = 0;
 	
 	Sprite background;
@@ -183,6 +183,13 @@ public class Play extends GameState {
 					if(dos){
 						player.setDy(player.getDy() + playerSpeed);
 					}
+
+				}
+				
+
+				if (keycode == Keys.BACKSPACE) {
+					Play.this.getStateManager().setState(new FadeOutIn(Play.this.getStateManager(), Play.this,
+							new Menu(Play.this.getStateManager()), false, false));
 
 				}
 
