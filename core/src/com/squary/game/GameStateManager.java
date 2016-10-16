@@ -1,5 +1,6 @@
 package com.squary.game;
 
+import java.util.Random;
 import java.util.Stack;
 
 public class GameStateManager {
@@ -33,7 +34,7 @@ public class GameStateManager {
 	public GameState getState(int state) {
 		if (state == PLAY) {
 			Play.STATE = -1;
-			return new Play(this);
+			return new Play(this,1);
 		}
 
 		if (state == SPLASH) {

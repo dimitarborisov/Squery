@@ -11,6 +11,8 @@ import com.squary.game.Alisquare.BoundingBox;
 import com.squary.game.Alisquare.PhysicsHandler;
 import com.squary.game.Alisquare.Vector2;
 
+import java.util.Random;
+
 public class Play extends GameState {
 	public static int STATE = -1;
 
@@ -37,12 +39,15 @@ public class Play extends GameState {
     final Sound doorSound = Gdx.audio.newSound(Gdx.files.internal("Door.wav"));
 
 
-	protected Play(GameStateManager gsm) {
+	protected Play(GameStateManager gsm,int themeID) {
 		super(gsm);
 
 
 		//set background
-		background = new Sprite(game.getTextureManager().getTexture("background"));
+        System.out.println(themeID);
+        game.getTextureManager().loadTexture("playbackground", "themes/"+themeID+"/background.png");
+        game.getTextureManager().loadTexture("playwall", "themes/"+themeID+"/walls.png");
+		background = new Sprite(game.getTextureManager().getTexture("playbackground"));
 		background.setSize(600, 600);
 		background.setX(0);
 		background.setY(0);
@@ -271,7 +276,8 @@ public class Play extends GameState {
 		gameBoard.update(dt);
 
 
-
+        Random r = new Random();
+        int randTheme = r.nextInt(10) + 1;
 		if(player.getX() + (player.getSize()/2) >= GameSquary.VWIDTH){
 			//System.out.println("HIT RIGHT border");
             doorSound.play();
@@ -279,8 +285,7 @@ public class Play extends GameState {
 			Gdx.input.setInputProcessor(null);
 
 
-
-			getStateManager().setState(new RightToLeft(getStateManager(), this, new Play(getStateManager()), false, false));
+			getStateManager().setState(new RightToLeft(getStateManager(), this, new Play(getStateManager(),randTheme), false, false));
 			
 		}
 		
@@ -289,7 +294,7 @@ public class Play extends GameState {
             doorSound.play();
 			Play.STATE = 2;
 			Gdx.input.setInputProcessor(null);
-			getStateManager().setState(new LeftToRight(getStateManager(), this, new Play(getStateManager()), false, false));
+			getStateManager().setState(new LeftToRight(getStateManager(), this, new Play(getStateManager(),randTheme), false, false));
 		}
 		
 		if(player.getY() <= 0){
@@ -297,7 +302,7 @@ public class Play extends GameState {
             doorSound.play();
 			Play.STATE = 3;
 			Gdx.input.setInputProcessor(null);
-			getStateManager().setState(new BottomToTop(getStateManager(), this, new Play(getStateManager()), false, false));
+			getStateManager().setState(new BottomToTop(getStateManager(), this, new Play(getStateManager(),randTheme), false, false));
 		}
 		
 		if(player.getY() + (player.getSize()/2) >= GameSquary.VHEIGHT){
@@ -305,7 +310,7 @@ public class Play extends GameState {
             doorSound.play();
 			Play.STATE = 4;
 			Gdx.input.setInputProcessor(null);
-			getStateManager().setState(new TopToBottom(getStateManager(), this, new Play(getStateManager()), false, false));
+			getStateManager().setState(new TopToBottom(getStateManager(), this, new Play(getStateManager(),randTheme), false, false));
 		}
 		
 	}

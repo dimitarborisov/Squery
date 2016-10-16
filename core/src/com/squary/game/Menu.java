@@ -176,7 +176,7 @@ public class Menu extends GameState {
 		
 		if(startButton.isClicked()){
             buttonClickSound.play();
-			getStateManager().setState(new FadeOutIn(getStateManager(), this, new Play(getStateManager()), false, false));
+			getStateManager().setState(new FadeOutIn(getStateManager(), this, new Play(getStateManager(),1), false, false));
 		}
 	}
 
