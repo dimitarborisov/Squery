@@ -16,13 +16,13 @@ import java.util.Random;
 public class Play extends GameState {
 	public static int STATE = -1;
 
-	public static int score = 0;
+	public int score = 0;
 	private GamePlayer player;
 	private GameWall[] gameWalls;
 	private GameBoard gameBoard;
 	private GameDoor[] gameDoors;
 	
-	private float playerSpeed = 5;
+	private float playerSpeed = 4;
     private float playerCooldown = 0;
 	
 	Sprite background;
@@ -197,6 +197,13 @@ public class Play extends GameState {
 					}
 
 				}
+				
+
+				if (keycode == Keys.BACKSPACE) {
+					Play.this.getStateManager().setState(new FadeOutIn(Play.this.getStateManager(), Play.this,
+							new Menu(Play.this.getStateManager()), false, false));
+
+				}
 
 				return true;
 			}
@@ -353,6 +360,7 @@ public class Play extends GameState {
 	}
 
 	private void endGame(){
+		this.gameBoard.resetLevel();
 		EndGame.SCORE = score;
 		getStateManager().setState(new FadeOutIn(getStateManager(), this, new EndGame(getStateManager()), false, false));
 	}

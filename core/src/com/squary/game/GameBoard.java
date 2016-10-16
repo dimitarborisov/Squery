@@ -18,6 +18,8 @@ public class GameBoard {
 	private List<DamageArea> damageAreas;
 	private GamePlayer player;
 	private GameSquary game;
+	private int myLevel;
+	private static int level=0;
 	
 	public GameBoard(GameSquary game, GamePlayer player) {
 //		board  = new int[SIZE][SIZE];
@@ -26,6 +28,7 @@ public class GameBoard {
         damageAreas = new ArrayList<DamageArea>();
 		this.game = game;
 		this.player = player;
+		this.myLevel = ++level;
 	}
 	
 	public void initialize() {
@@ -45,12 +48,12 @@ public class GameBoard {
 					temp.setPos(i*30+45, j*30+45);
 					temp.setSize(20,20);
 					enemies.add(temp);
-				} else if (rand2 ==3 || rand2 ==4) {
+				} else if ((rand2 ==3 || rand2 ==4) && (myLevel>1)) {
 					GameEnemy temp = new GameEnemyRandom(this.game);
 					temp.setPos(i*30+45, j*30+45);
 					temp.setSize(20,20);
 					enemies.add(temp);
-				} else if (rand2 ==5) {
+				} else if (rand2 ==5 &&(myLevel>2)) {
 					GameEnemy temp = new GameEnemyCharging(this.game, this.player);
 					temp.setPos(i*30+45, j*30+45);
 					temp.setSize(20,20);
@@ -115,5 +118,9 @@ public class GameBoard {
 
     public void addDamageArea(DamageArea d){
         damageAreas.add(d);
+    }
+    
+    public void resetLevel(){
+    	level = 0;
     }
 }
