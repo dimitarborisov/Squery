@@ -15,6 +15,7 @@ public class PhysicsHandler {
     private boolean collidingOnX;
     private boolean collidingOnY;
     private boolean playerAlive = true;
+    private int enemiesKilled = 0;
 
     public PhysicsHandler(GamePlayer _player, GameBoard _board){
         List<GameWall> walls = _board.getWalls();
@@ -78,6 +79,7 @@ public class PhysicsHandler {
         }
         for (GameEnemy enemy: taggedToKill){
             enemies.remove(enemy);
+            enemiesKilled++;
         }
 
         for (GameEntities wall: walls){
@@ -110,6 +112,10 @@ public class PhysicsHandler {
 
     public boolean isPlayerAlive(){
         return playerAlive;
+    }
+
+    public int getEnemiesKilled(){
+        return enemiesKilled;
     }
     
     public boolean isCollidingOnX() {
