@@ -7,7 +7,7 @@ import com.squary.game.Alisquare.RigidBody;
 import com.squary.game.Alisquare.Vector2;
 
 public class GameEnemyRandom extends GameEnemy {
-	private static final int SPEED = 1;
+	private static final int SPEED = 2;
 	private double angleTheta; //angle of enemy (maths standirt)
 	
 	public GameEnemyRandom(GameSquary game) {

@@ -57,8 +57,6 @@ public class Play extends GameState {
             gameWalls[i] = new GameWall(game,new Vector2(20,260),(float)Math.PI/4);
             BoundingBox.scale(gameWalls[i].body.bounds,new Vector2(20,260));
         }
-		gameBoard = new GameBoard(game);
-		gameBoard.initialize();
 
 		float wallspriteW = (gameWalls[0].wallSprite.getWidth()/2);
 		float wallspriteH = (gameWalls[0].wallSprite.getHeight()/2);
@@ -87,6 +85,10 @@ public class Play extends GameState {
 		player = new GamePlayer(game);
 		player.body.velocity = new Vector2(0,0);
 
+		// gameboard
+		gameBoard = new GameBoard(game, player);
+		gameBoard.initialize();
+		
 		// doors
 		gameDoors = new GameDoor[4];
 		for (int i = 0; i < 4; i++) {
