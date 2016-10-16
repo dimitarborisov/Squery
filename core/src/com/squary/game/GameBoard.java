@@ -23,6 +23,7 @@ public class GameBoard {
 //		board  = new int[SIZE][SIZE];
 		walls = new ArrayList<GameWall>();
 		enemies = new ArrayList<GameEnemy>();
+        damageAreas = new ArrayList<DamageArea>();
 		this.game = game;
 	}
 	
@@ -72,6 +73,9 @@ public class GameBoard {
 		for (GameEnemy enemy: enemies){
 			enemy.update(dt);
 		}
+        for(DamageArea area: damageAreas){
+            area.update(dt);
+        }
 	}
 	
 	public void render() {
@@ -81,6 +85,10 @@ public class GameBoard {
 		for (GameEnemy enemy: enemies){
 			enemy.render();
 		}
+
+		for(DamageArea area: damageAreas){
+            area.render();
+        }
 	}
 
 	

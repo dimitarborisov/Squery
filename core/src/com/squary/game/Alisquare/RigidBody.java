@@ -28,4 +28,9 @@ public class RigidBody {
         _body1.velocity = _body1.velocity.add(new Vector2(newVelX1,newVelY1));
         _body2.velocity = _body2.velocity.add(new Vector2(newVelX2,newVelY2));
     }
+
+    public void setPos(Vector2 position) {
+        bounds.position.x = position.x;
+        bounds.position.y = position.y;
+    }
 }

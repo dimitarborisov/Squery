@@ -8,14 +8,13 @@ import com.squary.game.Alisquare.Vector2;
 
 public class GameWall extends GameEntities {
 	public RigidBody body;
-	float sizeX,sizeY;
 	Sprite wallSprite;
 	
 	public GameWall(GameSquary game,int _size) {
 		super(game);
 		
 		wallSprite = new Sprite(game.getTextureManager().getTexture("wall"));
-		body = new RigidBody(BoundingBox.createRegularPolygon(4,new Vector2(0,0),(int)_size-5,(float)Math.PI/4),true,10,1);
+		body = new RigidBody(BoundingBox.createRegularPolygon(4,new Vector2(0,0),_size-5,(float)Math.PI/4),true,10,1);
         wallSprite.setSize(_size, _size);
 
 	}
@@ -58,7 +57,6 @@ public class GameWall extends GameEntities {
 	public void update(float dt) {
 		wallSprite.setX(body.bounds.position.x - (wallSprite.getWidth()/2));
 		wallSprite.setY(body.bounds.position.y - (wallSprite.getHeight()/2));
-
 
 	}
 

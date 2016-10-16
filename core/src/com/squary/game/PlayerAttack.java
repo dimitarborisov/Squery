@@ -14,15 +14,16 @@ public class PlayerAttack extends DamageArea {
     private int scale;
     private Sprite circleSprite;
 
-    public PlayerAttack(GameSquary game, Vector2 position) {
+    public PlayerAttack(GameSquary game) {
         super(game);
-        scale = 100;
-        BoundingBox bB = BoundingBox.createRegularPolygon(8,new Vector2(0,0),scale);
-        body = new RigidBody(bB,true,10,1);
-        super.visible = true;
+        circleSprite = new Sprite(game.getTextureManager().getTexture("damage-circle"));
 
-        circleSprite.setOriginCenter();
+        scale = 100;
+        BoundingBox bB = BoundingBox.createRegularPolygon(10,new Vector2(0,0),scale/2);
+        body = new RigidBody(bB,true,10,1);
+
         circleSprite.setSize(scale, scale);
+        super.visible = true;
     }
 
     @Override
@@ -48,7 +49,8 @@ public class PlayerAttack extends DamageArea {
 
     @Override
     public void update(float dt) {
-        
+        circleSprite.setX(body.bounds.position.x - (circleSprite.getWidth()/2));
+        circleSprite.setY(body.bounds.position.y - (circleSprite.getHeight()/2));
     }
 
     @Override
