@@ -140,7 +140,7 @@ public class Play extends GameState {
 
 				if (keycode == Keys.SPACE){
                     PlayerAttack tempAttack = new PlayerAttack(game);
-                    gameBoard.damageAreas.add(tempAttack);
+                    gameBoard.addDamageArea(tempAttack);
                     tempAttack.getBody().setPos(player.body.bounds.position);
 
                 }
@@ -221,7 +221,7 @@ public class Play extends GameState {
 
 	@Override
 	public void update(float dt) {
-        //Collision checks
+        //Collision checks and damage to player and enemies
 		PhysicsHandler handler = new PhysicsHandler(player,gameBoard);
 		player.setIsCollidingOnX(handler.isCollidingOnX());
 		player.setIsCollidingOnY(handler.isCollidingOnY());

@@ -1,10 +1,7 @@
 package com.squary.game.Alisquare;
 
-import com.squary.game.GameBoard;
-import com.squary.game.GameEnemy;
-import com.squary.game.GameEntities;
-import com.squary.game.GamePlayer;
-import com.squary.game.GameWall;
+import com.badlogic.gdx.Game;
+import com.squary.game.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +18,7 @@ public class PhysicsHandler {
     public PhysicsHandler(GamePlayer _player, GameBoard _board){
         List<GameWall> walls = _board.getWalls();
         List<GameEnemy> enemies = _board.getEnemies();
+		List<DamageArea> areas = _board.getAreas();
         collisions = new ArrayList<Collision>();
         collidingOnX = false;
         collidingOnY = false;
@@ -65,6 +63,15 @@ public class PhysicsHandler {
             }
         }
 
+        ArrayList<GameEnemy> taggedToKill = new ArrayList<GameEnemy>();
+        for (DamageArea area:areas){
+            for (GameEnemy enemy:enemies){
+                if (Collision.SACheck(area.getBody().bounds,enemy.getBody().bounds)) taggedToKill.add(enemy);
+            }
+        }
+        for (GameEnemy enemy: taggedToKill){
+            enemies.remove(enemy);
+        }
         for (GameEntities wall: walls){
             Vector2 col = Collision.AACheck(_player.body.bounds,wall.getBody().bounds);
             if (!col.equals(new Vector2(0,0))){

@@ -56,9 +56,9 @@ public class Collision{
             shape1Axes[i] = Vector2.normalize(Vector2.normal(current.subtract(next)));
         }
 
-        for (int i = 0; i < _shape1.vertices.length; i++){
-            Vector2 current = _shape2.vertices[i].add(_shape1.position);
-            Vector2 next = _shape2.vertices[i + 1 == _shape2.vertices.length ? 0 : i + 1].add(_shape1.position);
+        for (int i = 0; i < _shape2.vertices.length; i++){
+            Vector2 current = _shape2.vertices[i].add(_shape2.position);
+            Vector2 next = _shape2.vertices[i + 1 == _shape2.vertices.length ? 0 : i + 1].add(_shape2.position);
             shape2Axes[i] = Vector2.normalize(Vector2.normal(current.subtract(next)));
         }
 
