@@ -19,7 +19,7 @@ public class GameSquary implements ApplicationListener {
 	public static int VWIDTH = 600;
 	public static int VHEIGHT = 600;
 	public static String TITLE = "Squary";
-	public static boolean debug = true;
+	public static boolean debug = false;
 	
 	TextureManager manager;
 	

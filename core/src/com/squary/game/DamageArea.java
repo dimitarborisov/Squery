@@ -4,7 +4,8 @@ package com.squary.game;
  * Created by Alistair
  */
 public abstract class DamageArea extends GameEntities {
-    int lifespan = 60;
+    public static final int INITIAL_LIFESPAN = 50;
+    int lifespan = INITIAL_LIFESPAN;
 
     public DamageArea(GameSquary game) {
         super(game);

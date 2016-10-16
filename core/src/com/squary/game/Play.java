@@ -239,7 +239,7 @@ public class Play extends GameState {
 
 
 
-		if(player.getX() + player.getSize() >= GameSquary.VWIDTH){
+		if(player.getX() + (player.getSize()/2) >= GameSquary.VWIDTH){
 			//System.out.println("HIT RIGHT border");
 			Play.STATE = 1;
 			Gdx.input.setInputProcessor(null);
@@ -262,7 +262,7 @@ public class Play extends GameState {
 			getStateManager().setState(new BottomToTop(getStateManager(), this, new Play(getStateManager()), false, false));
 		}
 		
-		if(player.getY() + player.getSize() >= GameSquary.VHEIGHT){
+		if(player.getY() + (player.getSize()/2) >= GameSquary.VHEIGHT){
 			//System.out.println("Hit the top");
 			Play.STATE = 4;
 			Gdx.input.setInputProcessor(null);

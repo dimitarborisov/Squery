@@ -10,6 +10,7 @@ import com.squary.game.Alisquare.Vector2;
  * Created by Alistair
  */
 public class PlayerAttack extends DamageArea {
+    private float alpha = 1;
     private RigidBody body;
     private int scale;
     private Sprite circleSprite;
@@ -49,6 +50,8 @@ public class PlayerAttack extends DamageArea {
 
     @Override
     public void update(float dt) {
+        circleSprite.setAlpha(alpha);
+        alpha-= 0.02f;
         circleSprite.setX(body.bounds.position.x - (circleSprite.getWidth()/2));
         circleSprite.setY(body.bounds.position.y - (circleSprite.getHeight()/2));
     }

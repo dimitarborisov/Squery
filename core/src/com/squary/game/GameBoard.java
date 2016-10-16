@@ -73,9 +73,16 @@ public class GameBoard {
 		for (GameEnemy enemy: enemies){
 			enemy.update(dt);
 		}
+		ArrayList<DamageArea> areasToRemove= new ArrayList<DamageArea>();
         for(DamageArea area: damageAreas){
             area.update(dt);
             area.updateDecay();
+            if (area.lifespan <= 0){
+                areasToRemove.add(area);
+            }
+        }
+        for(DamageArea area: areasToRemove){
+            damageAreas.remove(area);
         }
 	}
 	
