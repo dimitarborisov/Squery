@@ -43,7 +43,7 @@ public class GameBoard {
 					walls.add(temp);
 					continue;
 				}
-				if (rand2 == 1 || rand2 ==2) {
+				if ((rand2 == 1 || rand2 ==2)&& (myLevel<4)) {
 					GameEnemy temp = new GameEnemyStationary(this.game);
 					temp.setPos(i*30+45, j*30+45);
 					temp.setSize(20,20);
