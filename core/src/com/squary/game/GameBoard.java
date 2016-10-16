@@ -99,6 +99,9 @@ public class GameBoard {
         }
 	}
 
+	public boolean anyMoreEnemies(){
+		return !this.enemies.isEmpty();
+	}
 
     public List<DamageArea> getAreas() {
         return damageAreas;

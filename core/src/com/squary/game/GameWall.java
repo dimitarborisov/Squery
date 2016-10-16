@@ -64,6 +64,10 @@ public class GameWall extends GameEntities {
     public RigidBody getBody() {
         return body;
     }
+    
+    public void setVisibility (boolean isVisible) {
+    	this.visible = isVisible;
+    }
 
 
     public void setPos(float x, float y){
