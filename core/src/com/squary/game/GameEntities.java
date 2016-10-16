@@ -14,4 +14,5 @@ public abstract class GameEntities {
 	public abstract void render();
 	public abstract void update(float dt);
     public abstract RigidBody getBody();
+
 }

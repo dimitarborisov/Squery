@@ -19,7 +19,7 @@ public class GameSquary implements ApplicationListener {
 	public static int VWIDTH = 600;
 	public static int VHEIGHT = 600;
 	public static String TITLE = "Squary";
-	public static boolean debug = true;
+	public static boolean debug = false;
 	
 	TextureManager manager;
 	
@@ -53,6 +53,7 @@ public class GameSquary implements ApplicationListener {
 		manager.loadTexture("playbutton2", "rect5904.png");
 		manager.loadTexture("optionsButton", "g11199.png");
 		manager.loadTexture("exitButton", "rect5909-7.png");
+		manager.loadTexture("damage-circle","dmg_circle.png");
 		
 		gsm = new GameStateManager(this);
 	}

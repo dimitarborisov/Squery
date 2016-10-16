@@ -138,6 +138,10 @@ public class Play extends GameState {
 					player.setDy(player.getDy() - playerSpeed);
 				}
 
+				if (keycode == Keys.SPACE){
+                    gameBoard.damageAreas.add(new PlayerAttack(game,player.body.bounds.position));
+                }
+
 				return true;
 			}
 

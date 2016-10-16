@@ -14,6 +14,7 @@ public class GameEnemyRandom extends GameEnemy {
 		super(game);
 		angleTheta = Math.PI/2;
 		enemySprite = new Sprite(game.getTextureManager().getTexture("enemy_stationary"));
+
 	}
 
 	@Override
@@ -28,11 +29,15 @@ public class GameEnemyRandom extends GameEnemy {
 		}
 
 		angleTheta += change;
-		//enemySprite.rotate(0.01f.);
+        enemySprite.setOriginCenter();
+		enemySprite.rotate((float)Math.toDegrees(0.01d));
 		//enemySprite.rotate((float)angleTheta);
 		this.body.bounds.rotate(new Vector2(0,0), 0.01f);
-        enemySprite.setRotation(enemySprite.getRotation()+0.01f);
-		// render at new position
+        //enemySprite.setRotation(0.01f);
+
+
+
+        // render at new position
 		enemySprite.setX(body.bounds.position.x - 9);//enemySprite.getHeight() instead of 10
 		enemySprite.setY(body.bounds.position.y - 7);//enemySprite.getWidth() instead of 10
 		enemySprite.setSize(sizeX, sizeY);
