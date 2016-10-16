@@ -12,6 +12,7 @@ import com.squary.game.Alisquare.Vector2;
 public class Play extends GameState {
 	public static int STATE = -1;
 
+	private int score = 0;
 	private GamePlayer player;
 	private GameWall[] gameWalls;
 	private GameBoard gameBoard;
@@ -294,4 +295,8 @@ public class Play extends GameState {
 
 	}
 
+	private void endGame(){
+		EndGame.SCORE = score;
+		getStateManager().setState(new FadeOutIn(getStateManager(), this, new EndGame(getStateManager()), false, false));
+	}
 }
